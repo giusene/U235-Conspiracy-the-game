@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+}
+
+.board {
+    width: 720px;
+    height: 720px;
+    position: relative;
+    background: url(../img/board.png) no-repeat;
+    background-position: 59px 59px;
+    background-color: #000;
+    background-color: rgb(15, 0, 113);
+}
+
+.pacman-stop{
+    background: #ffcc00;
+    z-index: 1;
+    position: absolute;
+    height: 60px;
+    width: 60px; 
+    border-radius: 50%;
+}
+
+.pacman {
+    background: transparent;
+    z-index: 1;
+    position: absolute;
+    height: 60px;
+    width: 60px;
+}
+
+.pacman::before, .pacman::after{
+    content: "";
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    height: 1px;
+    width: 1px;
+}
+
+.pacman::before{
+    animation: pactop 0.5s ease infinite;
+    border: 30px solid #ffcc00;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    top: 0px;
+    left: 0px;
+}
+
+@keyframes pactop {
+    0%,100% {
+        transform: rotate(-45deg);
+    }
+    50% {
+        transform: rotate(-80deg);
+    }
+}
+
+.pacman::after{
+    animation: pacbottom 0.5s ease infinite;
+    border: 30px solid #ffcc00;
+    border-right-color: transparent;
+    border-top-color: transparent;
+}
+
+@keyframes pacbottom {
+    0%,100% {
+        transform: rotate(-40deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+}
+.eye{
+    position: absolute;
+    z-index: 999;
+    width: 5px;
+    height: 5px;
+    top: 15px;
+    left: 30px;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0);
+}
+
+
+.rotate-left{
+    transform: scaleX(-1);
+}
+
+.rotate-down{
+    transform: rotate(90deg);
+}
+
+.rotate-right{
+}
+
+.rotate-up{
+    transform: rotate(-90deg);
+}
