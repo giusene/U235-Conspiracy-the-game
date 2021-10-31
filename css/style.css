@@ -18,7 +18,7 @@ body {
 .board {
     width: 720px;
     height: 720px;
-    background: url(../img/board-bg.png) no-repeat;
+    background: url(./../img/board-bg.png) no-repeat;
     background-size: cover;
     position: relative;
     display: flex;
@@ -48,7 +48,7 @@ body {
 }
 
 .block-true {
-    background: url(../img/block.png) no-repeat;
+    background: url(./../img/block.png) no-repeat;
     background-size: cover;
 }
 
