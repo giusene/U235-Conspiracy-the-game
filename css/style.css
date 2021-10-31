@@ -19,8 +19,29 @@ body {
     position: relative;
     background: url(../img/board.png) no-repeat;
     background-position: 59px 59px;
-    background-color: #000;
     background-color: rgb(15, 0, 113);
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.dot {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    
+}
+
+.dot-true::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 10px;
+    display: block;
+    position: absolute;
+    top: 24px;
+    left: 24px;
 }
 
 .pacman-stop{

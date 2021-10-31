@@ -1,4 +1,4 @@
-const board = [
+const boardScheme = [
     [1,1,1,1,1,1,1,1,1,1,1,1],
     [1,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,1,1,0,1,1,0,1,1,0,1],
@@ -13,6 +13,48 @@ const board = [
     [1,1,1,1,1,1,1,1,1,1,1,1]
 ]
 
+
+let board = [];
+
+for (lines of boardScheme) {
+    let newLine = [];
+    for (box of lines) {
+        let objectBox;
+            if (box === 0) {
+                objectBox = {
+                    block: false,
+                    dot: true,
+                    fruit: false
+                    }
+                
+            } else {
+                objectBox = {
+                    block: true,
+                    dot: false,
+                    fruit: false
+                    }
+            }
+        newLine.push(objectBox);
+    }
+    board.push(newLine);
+}
+
+const boardDiv = document.querySelector('.board');
+
+
+for (let i = 0 ; i < 12; i++) {
+    for (let ii = 0 ; ii < 12; ii++) {
+        let dotDiv = document.createElement('div');
+        dotDiv.classList.add('dot');
+        dotDiv.setAttribute('id', `${[i]+'-'+[ii]}`);
+        if (board[i][ii].dot) {
+            dotDiv.classList.add('dot-true');
+        }
+        boardDiv.appendChild(dotDiv);
+    }
+}
+
+
 const pacman = document.querySelector('#pacman');
 let pacmanTop = pacman.style.top;
 let pacmanTopPx = parseInt(pacmanTop.substring(0,pacmanTop.length-2));
@@ -24,6 +66,7 @@ let down = true;
 let left = false;
 let right = true;
 
+// FUNZIONE CHE DETERMINA LA POSIZIONE NELLO SCHEMA (ARRAY)
 const boardPosition = () => { 
     let positionX, positionY;  
     positionX = (Math.round(pacmanLeftPx / 60)); 
@@ -35,8 +78,25 @@ const boardPosition = () => {
     let positionRight = positionX + 1;
 
     console.log('Index Verticale: ' + positionY + 'Index Orizzionatale: ' + positionX);
+    blocksBlock(positionUp,positionDonw,positionLeft,positionRight,positionX,positionY);
+    dotEating(positionY,positionX);
+}
 
-    if (board[positionUp][positionX] !== 0) {
+// FUNZIONE MANGIA PALLINE //
+const dotEating = (positionY,positionX) => {
+    if (board[positionY][positionX].dot) {
+        let dotDiv = document.getElementById(`${positionY+'-'+positionX}`);
+        dotDiv.classList.remove('dot-true');
+        board[positionY][positionX].dot = false;
+    }
+}
+
+
+
+// FUNZIONE PER EVITARE OSTACOLI // 
+const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,positionX,positionY) => {
+
+    if (board[positionUp][positionX].block) {
         if (Number.isInteger(pacmanTopPx / 60)) {
             up = false;
         } else {
@@ -44,7 +104,7 @@ const boardPosition = () => {
         }
     } else up = true;
 
-    if (board[positionDonw][positionX] !== 0) {
+    if (board[positionDonw][positionX].block) {
         if (Number.isInteger(pacmanTopPx / 60)) {
             down = false;
         } else {
@@ -53,7 +113,7 @@ const boardPosition = () => {
         
     } else down = true;
     
-    if (board[positionY][positionRight] !== 0) {
+    if (board[positionY][positionRight].block) {
         if (Number.isInteger(pacmanLeftPx / 60)) {
             right = false;
         } else {
@@ -61,7 +121,7 @@ const boardPosition = () => {
         }
     } else right = true;
     
-    if (board[positionY][positionLeft] !== 0) {
+    if (board[positionY][positionLeft].block) {
         if (Number.isInteger(pacmanLeftPx / 60)) {
             left = false; 
         } else {
@@ -70,7 +130,7 @@ const boardPosition = () => {
     } else left = true;
 }
 
-// MOVIMENTI
+// FUNZIONE MOVIMENTI //
 
 document.onkeydown = arrowPress;
 document.onkeyup = arrowUp;
@@ -90,7 +150,6 @@ function arrowPress(event) {
             pacman.style.top = pacmanTopPx+'px';
             pacman.classList.add('rotate-up');
             pacman.classList.remove('rotate-down', 'rotate-left', 'rotate-right');
-            coordPrint();
             boardPosition();
         }
     }
@@ -102,7 +161,6 @@ function arrowPress(event) {
             pacman.style.top = pacmanTopPx+'px';
             pacman.classList.add('rotate-down');
             pacman.classList.remove('rotate-left', 'rotate-up', 'rotate-right');
-            coordPrint();
             boardPosition();
         }  
     }
@@ -114,7 +172,6 @@ function arrowPress(event) {
             pacman.style.left = pacmanLeftPx+'px';
             pacman.classList.add('rotate-left');
             pacman.classList.remove('rotate-right', 'rotate-down','rotate-up');
-            coordPrint();
             boardPosition();
         }
         
@@ -127,7 +184,6 @@ function arrowPress(event) {
             pacman.classList.add('rotate-right');
             pacman.classList.remove('rotate-left', 'rotate-down', 'rotate-up');
             boardPosition();
-            coordPrint();
         }
     }
     
@@ -135,3 +191,7 @@ function arrowPress(event) {
 
 // STAMPO COORDINATE // da rimuovere!!!
 const coordPrint = () => console.log('Top: ' + pacmanTopPx + ' Left: '+ pacmanLeftPx);
+
+
+
+console.log(document.getElementById('1-2'));
