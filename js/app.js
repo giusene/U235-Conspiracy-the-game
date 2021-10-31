@@ -4,15 +4,14 @@ const boardScheme = [
     [1,0,1,1,0,1,1,0,1,1,0,1],
     [1,0,1,1,0,0,0,0,1,1,0,1],
     [1,0,0,0,0,1,1,0,0,0,0,1],
-    [1,1,1,1,0,1,1,0,1,1,1,1],
-    [1,1,1,1,0,1,1,0,1,1,1,1],
+    [1,0,1,1,0,1,1,0,1,1,0,1],
+    [1,0,1,1,0,1,1,0,1,1,0,1],
     [1,0,0,0,0,1,1,0,0,0,0,1],
     [1,0,1,1,0,0,0,0,1,1,0,1],
     [1,0,1,1,0,1,1,0,1,1,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,1,1,1,1,1,1,1]
 ]
-
 
 let board = [];
 
@@ -50,6 +49,9 @@ for (let i = 0 ; i < 12; i++) {
         if (board[i][ii].dot) {
             dotDiv.classList.add('dot-true');
         }
+        if (board[i][ii].block) {
+            dotDiv.classList.add('block-true');
+        }
         boardDiv.appendChild(dotDiv);
     }
 }
@@ -65,6 +67,7 @@ let up = false;
 let down = true;
 let left = false;
 let right = true;
+let score = -1;
 
 // FUNZIONE CHE DETERMINA LA POSIZIONE NELLO SCHEMA (ARRAY)
 const boardPosition = () => { 
@@ -88,9 +91,12 @@ const dotEating = (positionY,positionX) => {
         let dotDiv = document.getElementById(`${positionY+'-'+positionX}`);
         dotDiv.classList.remove('dot-true');
         board[positionY][positionX].dot = false;
+        // PUNTEGGIO
+        score++;
+        let scorePrint = document.querySelector('h3');
+        scorePrint.querySelector('span').textContent = score;
     }
 }
-
 
 
 // FUNZIONE PER EVITARE OSTACOLI // 
@@ -131,7 +137,6 @@ const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,position
 }
 
 // FUNZIONE MOVIMENTI //
-
 document.onkeydown = arrowPress;
 document.onkeyup = arrowUp;
 
@@ -188,10 +193,3 @@ function arrowPress(event) {
     }
     
 }
-
-// STAMPO COORDINATE // da rimuovere!!!
-const coordPrint = () => console.log('Top: ' + pacmanTopPx + ' Left: '+ pacmanLeftPx);
-
-
-
-console.log(document.getElementById('1-2'));

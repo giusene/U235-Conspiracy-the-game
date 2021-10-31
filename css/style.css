@@ -9,6 +9,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    align-content: space-between;
     height: 100vh;
 
 }
@@ -16,10 +18,9 @@ body {
 .board {
     width: 720px;
     height: 720px;
+    background: url(../img/board-bg.png) no-repeat;
+    background-size: cover;
     position: relative;
-    background: url(../img/board.png) no-repeat;
-    background-position: 59px 59px;
-    background-color: rgb(15, 0, 113);
     display: flex;
     flex-wrap: wrap;
     
@@ -29,19 +30,26 @@ body {
     width: 60px;
     height: 60px;
     position: relative;
-    
 }
 
 .dot-true::before {
     content: '';
-    width: 10px;
-    height: 10px;
-    background: red;
+    width: 6px;
+    height: 6px;
+    background: #fff;
     border-radius: 10px;
     display: block;
     position: absolute;
     top: 24px;
     left: 24px;
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.7); 
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.7);
+    border: 1px solid rgb(113, 113, 113);
+}
+
+.block-true {
+    background: url(../img/block.png) no-repeat;
+    background-size: cover;
 }
 
 .pacman-stop{
@@ -128,4 +136,13 @@ body {
 
 .rotate-up{
     transform: rotate(-90deg);
+}
+
+
+.score-board {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    min-width: 200px;
+    text-align: center;
 }
