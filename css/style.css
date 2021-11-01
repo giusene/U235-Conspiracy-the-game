@@ -18,7 +18,7 @@ body {
 .board {
     width: 720px;
     height: 720px;
-    background: url(board-bg.png) no-repeat;
+    background: url(../img/board-bg.png) no-repeat;
     background-size: cover;
     position: relative;
     display: flex;
@@ -47,8 +47,18 @@ body {
     border: 1px solid rgb(113, 113, 113);
 }
 
+.fruit::after{
+    content: '';
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background: brown;
+    top: 10px;
+    left: 10px;
+}
+
 .block-true {
-    background: url(block.png) no-repeat;
+    background: url(../img/block.png) no-repeat;
     background-size: cover;
 }
 

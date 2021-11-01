@@ -41,8 +41,8 @@ for (lines of boardScheme) {
 const boardDiv = document.querySelector('.board');
 
 
-for (let i = 0 ; i < 12; i++) {
-    for (let ii = 0 ; ii < 12; ii++) {
+for (let i = 0 ; i < board.length; i++) {
+    for (let ii = 0 ; ii < board[0].length; ii++) {
         let dotDiv = document.createElement('div');
         dotDiv.classList.add('dot');
         dotDiv.setAttribute('id', `${[i]+'-'+[ii]}`);
@@ -55,6 +55,40 @@ for (let i = 0 ; i < 12; i++) {
         boardDiv.appendChild(dotDiv);
     }
 }
+
+// FUNZIONE FRUTTA
+const randomIndex = (maxLimit) => {
+    return Math.floor(Math.random() * maxLimit)
+}
+
+
+// FUNZIONE CHECKBLOCK TRUE
+
+
+let checkBlock = () => {
+    let firstRandom = randomIndex(board.length);
+    let secondRandom = randomIndex(board.length);
+    if (!board[firstRandom][secondRandom].block) {
+        let dotDiv = document.getElementById(`${firstRandom + '-' + secondRandom}`);
+        dotDiv.classList.add('fruit');
+        setTimeout(() => {
+            dotDiv.classList.remove('fruit');
+        }, 5000)
+        console.log(board[firstRandom][secondRandom].block);
+        console.log(firstRandom,secondRandom);
+    }
+}
+
+let fruitTimer = setInterval(checkBlock, 15000);
+
+
+
+
+
+
+
+
+
 
 
 const pacman = document.querySelector('#pacman');
