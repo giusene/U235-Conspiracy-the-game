@@ -148,6 +148,15 @@ body {
     transform: rotate(-90deg);
 }
 
+.enemy {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: red;
+    border-radius: 50%;
+    z-index: 2;
+}
+
 
 .score-board {
     background: #fff;

@@ -61,18 +61,16 @@ const randomIndex = (maxLimit) => {
     return Math.floor(Math.random() * maxLimit)
 }
 
-
-// FUNZIONE CHECKBLOCK TRUE
-
-
 let checkBlock = () => {
     let firstRandom = randomIndex(board.length);
     let secondRandom = randomIndex(board.length);
     if (!board[firstRandom][secondRandom].block) {
         let dotDiv = document.getElementById(`${firstRandom + '-' + secondRandom}`);
         dotDiv.classList.add('fruit');
+        board[firstRandom][secondRandom].fruit = true;
         setTimeout(() => {
             dotDiv.classList.remove('fruit');
+            board[firstRandom][secondRandom].fruit = false;
         }, 5000)
         console.log(board[firstRandom][secondRandom].block);
         console.log(firstRandom,secondRandom);
@@ -80,16 +78,6 @@ let checkBlock = () => {
 }
 
 let fruitTimer = setInterval(checkBlock, 15000);
-
-
-
-
-
-
-
-
-
-
 
 const pacman = document.querySelector('#pacman');
 let pacmanTop = pacman.style.top;
@@ -115,6 +103,7 @@ const boardPosition = () => {
     let positionRight = positionX + 1;
 
     console.log('Index Verticale: ' + positionY + 'Index Orizzionatale: ' + positionX);
+    console.log('Top: ' + pacmanTopPx + ' Left: ' + pacmanLeftPx);
     blocksBlock(positionUp,positionDonw,positionLeft,positionRight,positionX,positionY);
     dotEating(positionY,positionX);
 }
@@ -127,13 +116,18 @@ const dotEating = (positionY,positionX) => {
         board[positionY][positionX].dot = false;
         // PUNTEGGIO
         score++;
+        if (board[positionY][positionX].fruit) {
+            score+=10;
+            board[positionY][positionX].fruit = false;
+            dotDiv.classList.remove('fruit');
+        }
         let scorePrint = document.querySelector('h3');
         scorePrint.querySelector('span').textContent = score;
     }
 }
 
 
-// FUNZIONE PER EVITARE OSTACOLI // 
+// FUNZIONE PER EVITARE OSTACOLI //
 const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,positionX,positionY) => {
 
     if (board[positionUp][positionX].block) {
@@ -142,7 +136,14 @@ const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,position
         } else {
             up = true;
         }
-    } else up = true;
+    } else {
+        if (Number.isInteger(pacmanLeftPx / 60)) {
+            up = true;
+        } else {
+            up = false;
+        }
+
+    } 
 
     if (board[positionDonw][positionX].block) {
         if (Number.isInteger(pacmanTopPx / 60)) {
@@ -151,7 +152,14 @@ const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,position
             down = true;
         }
         
-    } else down = true;
+    } else {
+        if (Number.isInteger(pacmanLeftPx / 60)) {
+            down = true;
+        } else {
+            down = false;
+        }
+
+    } 
     
     if (board[positionY][positionRight].block) {
         if (Number.isInteger(pacmanLeftPx / 60)) {
@@ -159,15 +167,27 @@ const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,position
         } else {
             right = true; 
         }
-    } else right = true;
-    
+    } else {
+        if (Number.isInteger(pacmanTopPx / 60)) {
+            right = true;
+        } else {
+            right = false;
+        }
+    }
+
     if (board[positionY][positionLeft].block) {
         if (Number.isInteger(pacmanLeftPx / 60)) {
             left = false; 
         } else {
             left = true;
         }
-    } else left = true;
+    } else {
+        if (Number.isInteger(pacmanTopPx / 60)) {
+            left = true;
+        } else {
+            left = false;
+        }
+    } 
 }
 
 // FUNZIONE MOVIMENTI //
@@ -227,3 +247,7 @@ function arrowPress(event) {
     }
     
 }
+
+
+
+// FUNZIONE AI NEMICI //
