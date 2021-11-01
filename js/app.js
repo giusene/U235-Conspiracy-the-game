@@ -72,13 +72,12 @@ let checkBlock = () => {
             dotDiv.classList.remove('fruit');
             board[firstRandom][secondRandom].fruit = false;
         }, 5000)
-        console.log(board[firstRandom][secondRandom].block);
-        console.log(firstRandom,secondRandom);
     }
 }
 
 let fruitTimer = setInterval(checkBlock, 15000);
 
+// PACMAN POSITION
 const pacman = document.querySelector('#pacman');
 let pacmanTop = pacman.style.top;
 let pacmanTopPx = parseInt(pacmanTop.substring(0,pacmanTop.length-2));
@@ -91,6 +90,7 @@ let left = false;
 let right = true;
 let score = -1;
 
+
 // FUNZIONE CHE DETERMINA LA POSIZIONE NELLO SCHEMA (ARRAY)
 const boardPosition = () => { 
     let positionX, positionY;  
@@ -102,10 +102,10 @@ const boardPosition = () => {
     let positionLeft = positionX - 1;
     let positionRight = positionX + 1;
 
-    console.log('Index Verticale: ' + positionY + 'Index Orizzionatale: ' + positionX);
-    console.log('Top: ' + pacmanTopPx + ' Left: ' + pacmanLeftPx);
+    console.log('PACMAN X: ' + positionX + ' PACAMAN Y: ' + positionY);
     blocksBlock(positionUp,positionDonw,positionLeft,positionRight,positionX,positionY);
     dotEating(positionY,positionX);
+    enemiesAi(positionX,positionY);
 }
 
 // FUNZIONE MANGIA PALLINE //
@@ -248,6 +248,65 @@ function arrowPress(event) {
     
 }
 
+// ENEMY POSITION
+const enemy = document.querySelector('#enemy');
+let enemyTop = enemy.style.top;
+let enemyTopPx = parseInt(enemyTop.substring(0,enemyTop.length-2));
+let enemyLeft = enemy.style.left;
+let enemyLeftPx = parseInt(enemyLeft.substring(0,enemyLeft.length-2));
 
+// posizione nemico
+let enemyPositionX = (Math.round(enemyLeftPx / 60)); 
+let enemyPositionY = (Math.round(enemyTopPx / 60));
 
-// FUNZIONE AI NEMICI //
+let enemyPxTop, enemyPxLeft
+
+// FUNZIONE MOVIMENTO NEMICI //
+const enemiesAi = (pacmanPositionX,pacmanPositionY) => {
+
+    let positionUp = enemyPositionY - 1;
+    let positionDonw = enemyPositionY + 1;
+    let positionLeft = enemyPositionX - 1;
+    let positionRight = enemyPositionX + 1;
+
+    ///////// DA VEDERE DA QUESTO PUNTO ///////////////
+    //////// SONO SBAGLIATI I MOVIMENTI //////////////
+
+    if ((pacmanPositionX - enemyPositionX) > (pacmanPositionY - enemyPositionY)) {
+        if (pacmanPositionX >= enemyPositionX) {
+            enemyPositionX--;
+            enemyPxTop = 0;
+            enemyPxLeft = -60;
+            console.log('NEMICO X:' + enemyPositionX + ' NEMICO Y: ' + enemyPositionY)
+        } else {
+            enemyPositionX++;
+            enemyPxTop = 0;
+            enemyPxLeft = 60;
+            console.log('NEMICO X:' + enemyPositionX + ' NEMICO Y: ' + enemyPositionY)
+        }
+    } else {
+        if (pacmanPositionY >= enemyPositionY) {
+            enemyPositionY--;
+            enemyPxTop = -60;
+            enemyPxLeft = 0;
+            console.log('NEMICO X:' + enemyPositionX + ' NEMICO Y: ' + enemyPositionY)
+        } else {
+            enemyPositionY++;
+            enemyPxTop = -60;
+            enemyPxLeft = 0;
+            console.log('NEMICO X:' + enemyPositionX + ' NEMICO Y: ' + enemyPositionY)
+        }
+    }
+    console.log(enemyPxTop,enemyPxLeft)
+}
+
+console.log(enemyPxTop,enemyPxLeft)
+
+// FUNZIONE MOVIMENTO NEMICI TEMPORIZZATO  ////
+/////  (L'INTERVALLO DI TEMPO è LA DIFFICOLTA/VELOCITA DEL NEMICO)
+setInterval(() => {
+    enemyTopPx += enemyPxTop;
+    enemyLeftPx += enemyPxLeft;
+    enemy.style.top = enemyTopPx + 'px';
+    enemy.style.left = enemyLeftPx +'px';
+  }, 3000);
