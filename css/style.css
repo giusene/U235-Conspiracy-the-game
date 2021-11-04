@@ -77,6 +77,7 @@ body {
     position: absolute;
     height: 60px;
     width: 60px;
+    transition: all 0.1s linear;
 }
 
 .pacman::before, .pacman::after{
@@ -86,6 +87,7 @@ body {
     border-radius: 50%;
     height: 1px;
     width: 1px;
+    
 }
 
 .pacman::before{
@@ -155,6 +157,7 @@ body {
     background: red;
     border-radius: 50%;
     z-index: 2;
+    transition: all 0.3s ease-out;
 }
 
 

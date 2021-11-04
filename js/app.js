@@ -206,7 +206,7 @@ function arrowPress(event) {
     // up
     if (event.keyCode === 38) {
         if (up) {
-            pacmanTopPx -= 5;
+            pacmanTopPx -= 10;
             pacman.style.top = pacmanTopPx + 'px';
             pacman.classList.add('rotate-up');
             pacman.classList.remove('rotate-down', 'rotate-left', 'rotate-right');
@@ -217,7 +217,7 @@ function arrowPress(event) {
     // down
     if (event.keyCode === 40) {
         if (down) {
-            pacmanTopPx += 5;
+            pacmanTopPx += 10;
             pacman.style.top = pacmanTopPx + 'px';
             pacman.classList.add('rotate-down');
             pacman.classList.remove('rotate-left', 'rotate-up', 'rotate-right');
@@ -228,7 +228,7 @@ function arrowPress(event) {
     // left
     if (event.keyCode === 37) {
         if (left) {
-            pacmanLeftPx -= 5;
+            pacmanLeftPx -= 10;
             pacman.style.left = pacmanLeftPx + 'px';
             pacman.classList.add('rotate-left');
             pacman.classList.remove('rotate-right', 'rotate-down', 'rotate-up');
@@ -239,7 +239,7 @@ function arrowPress(event) {
     // right
     if (event.keyCode === 39) {
         if (right) {
-            pacmanLeftPx += 5;
+            pacmanLeftPx += 10;
             pacman.style.left = pacmanLeftPx + 'px';
             pacman.classList.add('rotate-right');
             pacman.classList.remove('rotate-left', 'rotate-down', 'rotate-up');
@@ -322,28 +322,31 @@ const enemiesAi = () => {
         if(!a.enemyY && b.enemyY) return -1;
         if(a.enemyY && !b.enemyY) return 1;
 
-        return b.diff - a.diff
+        return a.diff - b.diff
 
     })
-    // const bestPosition = checkPosition.sort((a, b) => (a.diff - b.diff));
-    // const bestPosition2 = bestPosition.sort((a, b) => (a.enemyX - b.enemyX));
-    // const bestPosition3 = bestPosition2.sort((a, b) => (a.enemyY - b.enemyY));
 
-    console.log(checkPosition)
-    console.log(bestPosition)
-
+    let verify = 0;
     for (let pos of bestPosition) {
-        
+        verify++
             if (!pos.block && pos.enemyX && pos.enemyY) {
-                console.log(pos.top)
-                console.log(pos.left)
                 enemyTopPx += pos.top;
                 enemyLeftPx += pos.left;
                 enemyPositionX += pos.positionX;
                 enemyPositionY += pos.positionY;
-    
-                console.log(enemyPositionX, pos.positionX)
                 break;
+            }
+            if (verify === 4) {
+                for (let posSecond of bestPosition) {
+                    if (!posSecond.block && posSecond.diff ===0) {
+                        enemyTopPx += posSecond.top;
+                        enemyLeftPx += posSecond.left;
+                        enemyPositionX += posSecond.positionX;
+                        enemyPositionY += posSecond.positionY;
+                        console.log('second')
+                        break;
+                    }
+                }
             }
     }
 
@@ -356,4 +359,4 @@ const enemiesAi = () => {
 /////  (L'INTERVALLO DI TEMPO è LA DIFFICOLTA/VELOCITA DEL NEMICO)
 setInterval(() => {
     enemiesAi();
-}, 1000);
+}, 2000);
