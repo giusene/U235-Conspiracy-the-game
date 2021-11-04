@@ -1,16 +1,16 @@
 const boardScheme = [
-    [1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,1,1,0,1,1,0,1,1,0,1],
-    [1,0,1,1,0,0,0,0,1,1,0,1],
-    [1,0,0,0,0,1,1,0,0,0,0,1],
-    [1,0,1,1,0,1,1,0,1,1,0,1],
-    [1,0,1,1,0,1,1,0,1,1,0,1],
-    [1,0,0,0,0,1,1,0,0,0,0,1],
-    [1,0,1,1,0,0,0,0,1,1,0,1],
-    [1,0,1,1,0,1,1,0,1,1,0,1],
-    [1,0,0,0,0,0,0,0,0,0,0,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1]
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+    [1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1],
+    [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+    [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+    [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1],
+    [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
 let board = [];
@@ -19,20 +19,20 @@ for (lines of boardScheme) {
     let newLine = [];
     for (box of lines) {
         let objectBox;
-            if (box === 0) {
-                objectBox = {
-                    block: false,
-                    dot: true,
-                    fruit: false
-                    }
-                
-            } else {
-                objectBox = {
-                    block: true,
-                    dot: false,
-                    fruit: false
-                    }
+        if (box === 0) {
+            objectBox = {
+                block: false,
+                dot: true,
+                fruit: false
             }
+
+        } else {
+            objectBox = {
+                block: true,
+                dot: false,
+                fruit: false
+            }
+        }
         newLine.push(objectBox);
     }
     board.push(newLine);
@@ -41,11 +41,11 @@ for (lines of boardScheme) {
 const boardDiv = document.querySelector('.board');
 
 
-for (let i = 0 ; i < board.length; i++) {
-    for (let ii = 0 ; ii < board[0].length; ii++) {
+for (let i = 0; i < board.length; i++) {
+    for (let ii = 0; ii < board[0].length; ii++) {
         let dotDiv = document.createElement('div');
         dotDiv.classList.add('dot');
-        dotDiv.setAttribute('id', `${[i]+'-'+[ii]}`);
+        dotDiv.setAttribute('id', `${[i] + '-' + [ii]}`);
         if (board[i][ii].dot) {
             dotDiv.classList.add('dot-true');
         }
@@ -80,9 +80,9 @@ let fruitTimer = setInterval(checkBlock, 15000);
 // PACMAN POSITION
 const pacman = document.querySelector('#pacman');
 let pacmanTop = pacman.style.top;
-let pacmanTopPx = parseInt(pacmanTop.substring(0,pacmanTop.length-2));
+let pacmanTopPx = parseInt(pacmanTop.substring(0, pacmanTop.length - 2));
 let pacmanLeft = pacman.style.left;
-let pacmanLeftPx = parseInt(pacmanLeft.substring(0,pacmanLeft.length-2));
+let pacmanLeftPx = parseInt(pacmanLeft.substring(0, pacmanLeft.length - 2));
 
 let up = false;
 let down = true;
@@ -92,32 +92,33 @@ let score = -1;
 
 
 // FUNZIONE CHE DETERMINA LA POSIZIONE NELLO SCHEMA (ARRAY)
-const boardPosition = () => { 
-    let positionX, positionY;  
-    positionX = (Math.round(pacmanLeftPx / 60)); 
+const boardPosition = () => {
+    let positionX, positionY;
+    positionX = (Math.round(pacmanLeftPx / 60));
     positionY = (Math.round(pacmanTopPx / 60));
-    
+
     let positionUp = positionY - 1;
-    let positionDonw = positionY + 1;
+    let positionDown = positionY + 1;
     let positionLeft = positionX - 1;
     let positionRight = positionX + 1;
 
     console.log('PACMAN X: ' + positionX + ' PACAMAN Y: ' + positionY);
-    blocksBlock(positionUp,positionDonw,positionLeft,positionRight,positionX,positionY);
-    dotEating(positionY,positionX);
-    enemiesAi(positionX,positionY);
+    blocksBlock(positionUp, positionDown, positionLeft, positionRight, positionX, positionY);
+    dotEating(positionY, positionX);
+    pacmanPositionX = positionX;
+    pacmanPositionY = positionY;
 }
 
 // FUNZIONE MANGIA PALLINE //
-const dotEating = (positionY,positionX) => {
+const dotEating = (positionY, positionX) => {
     if (board[positionY][positionX].dot) {
-        let dotDiv = document.getElementById(`${positionY+'-'+positionX}`);
+        let dotDiv = document.getElementById(`${positionY + '-' + positionX}`);
         dotDiv.classList.remove('dot-true');
         board[positionY][positionX].dot = false;
         // PUNTEGGIO
         score++;
         if (board[positionY][positionX].fruit) {
-            score+=10;
+            score += 10;
             board[positionY][positionX].fruit = false;
             dotDiv.classList.remove('fruit');
         }
@@ -128,7 +129,7 @@ const dotEating = (positionY,positionX) => {
 
 
 // FUNZIONE PER EVITARE OSTACOLI //
-const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,positionX,positionY) => {
+const blocksBlock = (positionUp, positionDown, positionLeft, positionRight, positionX, positionY) => {
 
     if (board[positionUp][positionX].block) {
         if (Number.isInteger(pacmanTopPx / 60)) {
@@ -143,15 +144,15 @@ const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,position
             up = false;
         }
 
-    } 
+    }
 
-    if (board[positionDonw][positionX].block) {
+    if (board[positionDown][positionX].block) {
         if (Number.isInteger(pacmanTopPx / 60)) {
             down = false;
         } else {
             down = true;
         }
-        
+
     } else {
         if (Number.isInteger(pacmanLeftPx / 60)) {
             down = true;
@@ -159,13 +160,13 @@ const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,position
             down = false;
         }
 
-    } 
-    
+    }
+
     if (board[positionY][positionRight].block) {
         if (Number.isInteger(pacmanLeftPx / 60)) {
             right = false;
         } else {
-            right = true; 
+            right = true;
         }
     } else {
         if (Number.isInteger(pacmanTopPx / 60)) {
@@ -177,7 +178,7 @@ const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,position
 
     if (board[positionY][positionLeft].block) {
         if (Number.isInteger(pacmanLeftPx / 60)) {
-            left = false; 
+            left = false;
         } else {
             left = true;
         }
@@ -187,7 +188,7 @@ const blocksBlock = (positionUp,positionDonw,positionLeft,positionRight,position
         } else {
             left = false;
         }
-    } 
+    }
 }
 
 // FUNZIONE MOVIMENTI //
@@ -196,7 +197,7 @@ document.onkeyup = arrowUp;
 
 function arrowUp() {
     pacman.classList.remove('pacman');
-    pacman.classList.add('pacman-stop');  
+    pacman.classList.add('pacman-stop');
 }
 
 function arrowPress(event) {
@@ -205,8 +206,8 @@ function arrowPress(event) {
     // up
     if (event.keyCode === 38) {
         if (up) {
-            pacmanTopPx-=5;
-            pacman.style.top = pacmanTopPx+'px';
+            pacmanTopPx -= 5;
+            pacman.style.top = pacmanTopPx + 'px';
             pacman.classList.add('rotate-up');
             pacman.classList.remove('rotate-down', 'rotate-left', 'rotate-right');
             boardPosition();
@@ -216,97 +217,143 @@ function arrowPress(event) {
     // down
     if (event.keyCode === 40) {
         if (down) {
-            pacmanTopPx+=5;
-            pacman.style.top = pacmanTopPx+'px';
+            pacmanTopPx += 5;
+            pacman.style.top = pacmanTopPx + 'px';
             pacman.classList.add('rotate-down');
             pacman.classList.remove('rotate-left', 'rotate-up', 'rotate-right');
             boardPosition();
-        }  
+        }
     }
 
     // left
     if (event.keyCode === 37) {
         if (left) {
-            pacmanLeftPx-=5;
-            pacman.style.left = pacmanLeftPx+'px';
+            pacmanLeftPx -= 5;
+            pacman.style.left = pacmanLeftPx + 'px';
             pacman.classList.add('rotate-left');
-            pacman.classList.remove('rotate-right', 'rotate-down','rotate-up');
+            pacman.classList.remove('rotate-right', 'rotate-down', 'rotate-up');
             boardPosition();
         }
-        
+
     }
     // right
     if (event.keyCode === 39) {
         if (right) {
-            pacmanLeftPx+=5;
-            pacman.style.left = pacmanLeftPx+'px';
+            pacmanLeftPx += 5;
+            pacman.style.left = pacmanLeftPx + 'px';
             pacman.classList.add('rotate-right');
             pacman.classList.remove('rotate-left', 'rotate-down', 'rotate-up');
             boardPosition();
         }
     }
-    
+
 }
 
 // ENEMY POSITION
 const enemy = document.querySelector('#enemy');
 let enemyTop = enemy.style.top;
-let enemyTopPx = parseInt(enemyTop.substring(0,enemyTop.length-2));
+let enemyTopPx = parseInt(enemyTop.substring(0, enemyTop.length - 2));
 let enemyLeft = enemy.style.left;
-let enemyLeftPx = parseInt(enemyLeft.substring(0,enemyLeft.length-2));
+let enemyLeftPx = parseInt(enemyLeft.substring(0, enemyLeft.length - 2));
 
-// posizione nemico
-let enemyPositionX = (Math.round(enemyLeftPx / 60)); 
-let enemyPositionY = (Math.round(enemyTopPx / 60));
 
-let enemyPxTop, enemyPxLeft
+
+let enemyPxTop = 0;
+let enemyPxLeft = 0;
+
+let pacmanPositionX = 1;
+let pacmanPositionY = 1;
+
+
 
 // FUNZIONE MOVIMENTO NEMICI //
-const enemiesAi = (pacmanPositionX,pacmanPositionY) => {
+const enemiesAi = () => {
+    // posizione nemico
+    let enemyPositionX = (Math.round(enemyLeftPx / 60));
+    let enemyPositionY = (Math.round(enemyTopPx / 60));
 
-    let positionUp = enemyPositionY - 1;
-    let positionDonw = enemyPositionY + 1;
-    let positionLeft = enemyPositionX - 1;
-    let positionRight = enemyPositionX + 1;
-
-    ///////// DA VEDERE DA QUESTO PUNTO ///////////////
-    //////// SONO SBAGLIATI I MOVIMENTI //////////////
-
-    if ((pacmanPositionX - enemyPositionX) > (pacmanPositionY - enemyPositionY)) {
-        if (pacmanPositionX >= enemyPositionX) {
-            enemyPositionX--;
-            enemyPxTop = 0;
-            enemyPxLeft = -60;
-            console.log('NEMICO X:' + enemyPositionX + ' NEMICO Y: ' + enemyPositionY)
-        } else {
-            enemyPositionX++;
-            enemyPxTop = 0;
-            enemyPxLeft = 60;
-            console.log('NEMICO X:' + enemyPositionX + ' NEMICO Y: ' + enemyPositionY)
+    let checkPosition = [
+        {
+            diff: Math.abs(pacmanPositionY - enemyPositionY),
+            left: 0,
+            top: -60,
+            positionY: -1,
+            positionX: 0,
+            enemyX: true,
+            enemyY: Math.abs(enemyPositionY-1 - pacmanPositionY) < Math.abs(enemyPositionY+1 - pacmanPositionY) ? true : false,
+            block: board[enemyPositionY - 1][enemyPositionX].block,
+        },
+        {
+            diff: Math.abs(pacmanPositionY - enemyPositionY),
+            left: 0,
+            top: 60,
+            positionY: 1,
+            positionX: 0,
+            enemyX: true,
+            enemyY: Math.abs(enemyPositionY-1 - pacmanPositionY) > Math.abs(enemyPositionY+1 - pacmanPositionY) ? true : false,
+            block: board[enemyPositionY + 1][enemyPositionX].block,
+        },
+        {
+            diff: Math.abs(pacmanPositionX - enemyPositionX),
+            left: -60,
+            top: 0,
+            positionY: 0,
+            positionX: -1,
+            enemyX: Math.abs(enemyPositionX-1 - pacmanPositionX) < Math.abs(enemyPositionX+1 - pacmanPositionX) ? true : false,
+            enemyY: true,
+            block: board[enemyPositionY][enemyPositionX - 1].block,
+        },
+        {
+            diff: Math.abs(pacmanPositionX - enemyPositionX),
+            left: 60,
+            top: 0,
+            positionY: 0,
+            positionX: 1,
+            enemyX: Math.abs(enemyPositionX-1 - pacmanPositionX) > Math.abs(enemyPositionX+1 - pacmanPositionX) ? true : false,
+            enemyY: true,
+            block: board[enemyPositionY][enemyPositionX + 1].block,
         }
-    } else {
-        if (pacmanPositionY >= enemyPositionY) {
-            enemyPositionY--;
-            enemyPxTop = -60;
-            enemyPxLeft = 0;
-            console.log('NEMICO X:' + enemyPositionX + ' NEMICO Y: ' + enemyPositionY)
-        } else {
-            enemyPositionY++;
-            enemyPxTop = -60;
-            enemyPxLeft = 0;
-            console.log('NEMICO X:' + enemyPositionX + ' NEMICO Y: ' + enemyPositionY)
-        }
+    ];
+
+    const bestPosition = checkPosition.sort( function(a,b) {
+        if(a.enemyX && !b.enemyX) return -1;
+        if(!a.enemyX && b.enemyX) return 1;
+
+        if(!a.enemyY && b.enemyY) return -1;
+        if(a.enemyY && !b.enemyY) return 1;
+
+        return b.diff - a.diff
+
+    })
+    // const bestPosition = checkPosition.sort((a, b) => (a.diff - b.diff));
+    // const bestPosition2 = bestPosition.sort((a, b) => (a.enemyX - b.enemyX));
+    // const bestPosition3 = bestPosition2.sort((a, b) => (a.enemyY - b.enemyY));
+
+    console.log(checkPosition)
+    console.log(bestPosition)
+
+    for (let pos of bestPosition) {
+        
+            if (!pos.block && pos.enemyX && pos.enemyY) {
+                console.log(pos.top)
+                console.log(pos.left)
+                enemyTopPx += pos.top;
+                enemyLeftPx += pos.left;
+                enemyPositionX += pos.positionX;
+                enemyPositionY += pos.positionY;
+    
+                console.log(enemyPositionX, pos.positionX)
+                break;
+            }
     }
-    console.log(enemyPxTop,enemyPxLeft)
+
+    enemy.style.top = enemyTopPx + 'px';
+    enemy.style.left = enemyLeftPx + 'px';
 }
 
-console.log(enemyPxTop,enemyPxLeft)
 
 // FUNZIONE MOVIMENTO NEMICI TEMPORIZZATO  ////
 /////  (L'INTERVALLO DI TEMPO è LA DIFFICOLTA/VELOCITA DEL NEMICO)
 setInterval(() => {
-    enemyTopPx += enemyPxTop;
-    enemyLeftPx += enemyPxLeft;
-    enemy.style.top = enemyTopPx + 'px';
-    enemy.style.left = enemyLeftPx +'px';
-  }, 3000);
+    enemiesAi();
+}, 1000);
