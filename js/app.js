@@ -41,8 +41,12 @@ for (lines of boardScheme) {
 const boardDiv = document.querySelector('.board');
 
 
+let zIndexForLines = 1;
 for (let i = 0; i < board.length; i++) {
+    let zIndexForBlock = 30;
+    zIndexForLines++
     for (let ii = 0; ii < board[0].length; ii++) {
+        zIndexForBlock--
         let dotDiv = document.createElement('div');
         dotDiv.classList.add('dot');
         dotDiv.setAttribute('id', `${[i] + '-' + [ii]}`);
@@ -51,8 +55,10 @@ for (let i = 0; i < board.length; i++) {
         }
         if (board[i][ii].block) {
             dotDiv.classList.add('block-true');
+            dotDiv.style.zIndex = parseInt('' + zIndexForLines + zIndexForBlock);
         }
         boardDiv.appendChild(dotDiv);
+
     }
 }
 
@@ -111,20 +117,22 @@ const boardPosition = () => {
 
 // FUNZIONE MANGIA PALLINE //
 const dotEating = (positionY, positionX) => {
+    let dotDiv = document.getElementById(`${positionY + '-' + positionX}`);
+    let scorePrint = document.querySelector('h3');
     if (board[positionY][positionX].dot) {
-        let dotDiv = document.getElementById(`${positionY + '-' + positionX}`);
         dotDiv.classList.remove('dot-true');
         board[positionY][positionX].dot = false;
         // PUNTEGGIO
         score++;
-        if (board[positionY][positionX].fruit) {
-            score += 10;
-            board[positionY][positionX].fruit = false;
-            dotDiv.classList.remove('fruit');
-        }
-        let scorePrint = document.querySelector('h3');
-        scorePrint.querySelector('span').textContent = score;
     }
+    // PUNTEGGIO FRUTTA
+    if (board[positionY][positionX].fruit) {
+        score += 10;
+        board[positionY][positionX].fruit = false;
+        dotDiv.classList.remove('fruit');
+    }
+    
+    scorePrint.querySelector('span').textContent = score;
 }
 
 

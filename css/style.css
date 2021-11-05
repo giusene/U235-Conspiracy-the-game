@@ -5,7 +5,7 @@
 }
 
 body {
-    background: #000;
+    background: #000; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,21 +30,35 @@ body {
     width: 60px;
     height: 60px;
     position: relative;
+    background: url(../img/floor2.png) no-repeat;
 }
 
 .dot-true::before {
+    animation: dotpulse 0.8s ease infinite;
     content: '';
-    width: 6px;
-    height: 6px;
-    background: #fff;
+    width: 10px;
+    height: 10px;
+    background: rgb(188, 255, 81);
     border-radius: 10px;
     display: block;
     position: absolute;
-    top: 24px;
+    top: 5px;
     left: 24px;
-    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.7); 
-    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.7);
-    border: 1px solid rgb(113, 113, 113);
+    
+    border: 2px solid rgb(114, 167, 29);
+}
+
+@keyframes dotpulse {
+    0%,100% {
+        top: 5px;
+        -webkit-box-shadow: 0px 20px 5px 0px rgba(0,0,0,0.7); 
+        box-shadow: 0px 20px 5px 0px rgba(0,0,0,0.7);
+    }
+    50% {
+        top: 0px;
+        -webkit-box-shadow: 0px 25px 5px 0px rgba(0,0,0,0.7); 
+        box-shadow: 0px 25px 5px 0px rgba(0,0,0,0.7);
+    }
 }
 
 .fruit::after{
@@ -58,8 +72,18 @@ body {
 }
 
 .block-true {
-    background: url(../img/block.png) no-repeat;
-    background-size: cover;
+    /* background: url(../img/cubo.png) no-repeat bottom left; */
+    overflow: visible;
+}
+
+.block-true::before {
+    content: '';
+    background: url(../img/cubo.png) no-repeat bottom left;
+    width: 90px;
+    height: 90px;
+    bottom: 0px;
+    left: 0px;
+    position: absolute;
 }
 
 .pacman-stop{
