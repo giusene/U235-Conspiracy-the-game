@@ -1,0 +1,167 @@
+.dot {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    background: url(../img/floor2.png) no-repeat;
+}
+
+.dot-true::before {
+    animation: dotpulse 0.8s ease infinite;
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: rgb(188, 255, 81);
+    border-radius: 10px;
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 24px;
+    
+    border: 2px solid rgb(114, 167, 29);
+}
+
+@keyframes dotpulse {
+    0%,100% {
+        top: 5px;
+        -webkit-box-shadow: 0px 20px 5px 0px rgba(0,0,0,0.7); 
+        box-shadow: 0px 20px 5px 0px rgba(0,0,0,0.7);
+    }
+    50% {
+        top: 0px;
+        -webkit-box-shadow: 0px 25px 5px 0px rgba(0,0,0,0.7); 
+        box-shadow: 0px 25px 5px 0px rgba(0,0,0,0.7);
+    }
+}
+
+.fruit::after{
+    content: '';
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background: brown;
+    top: 10px;
+    left: 10px;
+}
+
+.block-true {
+    overflow: visible;
+}
+
+.block-true::before {
+    content: '';
+    background: url(../img/cubo.png) no-repeat bottom left;
+    width: 90px;
+    height: 90px;
+    bottom: 0px;
+    left: 0px;
+    position: absolute;
+}
+
+/*  */
+.pacman-stop{
+    background: #ffcc00;
+    z-index: 1;
+    position: absolute;
+    height: 60px;
+    width: 60px; 
+    border-radius: 50%;
+}
+
+.pacman {
+    background: transparent;
+    z-index: 1;
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    transition: all 0.1s linear;
+}
+
+.pacman::before, .pacman::after{
+    content: "";
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    height: 1px;
+    width: 1px;
+    
+}
+
+.pacman::before{
+    animation: pactop 0.5s ease infinite;
+    border: 30px solid #ffcc00;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    top: 0px;
+    left: 0px;
+}
+
+@keyframes pactop {
+    0%,100% {
+        transform: rotate(-45deg);
+    }
+    50% {
+        transform: rotate(-80deg);
+    }
+}
+
+.pacman::after{
+    animation: pacbottom 0.5s ease infinite;
+    border: 30px solid #ffcc00;
+    border-right-color: transparent;
+    border-top-color: transparent;
+}
+
+@keyframes pacbottom {
+    0%,100% {
+        transform: rotate(-40deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+}
+.eye{
+    position: absolute;
+    z-index: 999;
+    width: 5px;
+    height: 5px;
+    top: 15px;
+    left: 30px;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0);
+}
+
+
+.rotate-left{
+    transform: scaleX(-1);
+}
+
+.rotate-down{
+    transform: rotate(90deg);
+}
+
+.rotate-right{
+}
+
+.rotate-up{
+    transform: rotate(-90deg);
+}
+
+.enemy {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: red;
+    border-radius: 50%;
+    z-index: 2;
+    transition: all 0.3s ease-out;
+}
+
+
+.score-board {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    min-width: 200px;
+    text-align: center;
+    color: #000;
+}
