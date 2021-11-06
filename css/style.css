@@ -47,7 +47,7 @@ main.horizontal {
 
 main .title {
     position: relative;
-    transition: all 1s ease-out;
+    transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
     background-color: cornflowerblue;
 }
 
@@ -60,7 +60,7 @@ main .container {
     align-items: center;
     flex-direction: column;
     position: relative;
-    transition: all 1s ease-out;
+    transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
     background-color: rgb(96, 205, 132);
 }
 
@@ -76,7 +76,7 @@ main .credit {
     flex-direction: column;
     position: absolute;
     top: 1000px;
-    transition: all 0.2s ease-out;
+    transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 main .credit .button{
@@ -95,8 +95,22 @@ main .credit .button{
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    transition: all 1s ease-out;
+    transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
     background-color: cornsilk;
+}
+
+.board .countdown{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 740px;
+    height: 720px;
+    z-index: 9999;
+    color: #fff;
+    font-size: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sidebar {
@@ -104,7 +118,7 @@ main .credit .button{
     position: relative;
     width: 240px;
     height: 720px;
-    transition: all 1s ease-out;
+    transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
     background-color: darkgray;
 }
 

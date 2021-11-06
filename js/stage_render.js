@@ -25,29 +25,50 @@ export const stageRender = () => {
     boardDiv.classList.add('board');
     boardDiv.style.right = '-2000px';
 
+    // create countdown
+    const countdown = document.createElement('div');
+    countdown.setAttribute('id', 'countdown');
+    countdown.classList.add('countdown');
+
+    let countText = 3;
+    const timerCount = () => {
+        if (countText === 0) {
+            clearInterval(timerFunc)
+            countdown.textContent = 'GO!';
+            setTimeout(() => boardDiv.removeChild(countdown), 1000)
+        } else {
+            countdown.textContent = countText;
+            countText--
+        }
+    }
+
+    const timerFunc = setInterval(timerCount, 1000)
+
     mainContainer.appendChild(sideBar);
     mainContainer.appendChild(boardDiv);
+    boardDiv.appendChild(countdown);
     sideBar.appendChild(scoreBoard);
     sideBar.appendChild(exitBtn);
 
-    setTimeout( () => {
-        sideBar.classList.add('left-animation'); 
+    setTimeout(() => {
+        sideBar.classList.add('left-animation');
         boardDiv.classList.add('right-animation');
     }, 100)
 
     exitBtn.addEventListener('click', () => {
-        sideBar.classList.remove('left-animation'); 
+        sideBar.classList.remove('left-animation');
         boardDiv.classList.remove('right-animation');
-        
-        setTimeout( () => {
+
+        setTimeout(() => {
             mainContainer.classList.remove('horizontal');
             mainContainer.removeChild(sideBar);
             mainContainer.removeChild(boardDiv);
             mainMenu('-1000px', '1000px');
-        }, 1000)   
+        }, 1000)
     })
 
-    levelGenerator(0,3,0,boardDiv, scoreBoard);
+    levelGenerator(0, 3, 0, boardDiv, scoreBoard);
+
 }
 
 
