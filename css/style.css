@@ -31,14 +31,12 @@ body {
 }
 
 main {
-    border: 1px solid red;
     width: 960px;
     height: 720px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: coral;
 }
 
 main.horizontal {
@@ -48,11 +46,10 @@ main.horizontal {
 main .title {
     position: relative;
     transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-    background-color: cornflowerblue;
+    font-size: 80px;
 }
 
 main .container {
-    border: 1px solid red;
     width: 100%;
     height: 400px;
     display: flex;
@@ -61,11 +58,9 @@ main .container {
     flex-direction: column;
     position: relative;
     transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-    background-color: rgb(96, 205, 132);
 }
 
 main .credit {
-    border: 1px solid red;
     background: #000;
     width: 100%;
     height: 400px;
@@ -87,16 +82,13 @@ main .credit .button{
 }
 
 .board {
-    border: 1px solid red;
-    width: 740px;
+    width: 720px;
     height: 720px;
-    /* background: url(../img/board-bg.png) no-repeat; */
     background-size: cover;
     position: relative;
     display: flex;
     flex-wrap: wrap;
     transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-    background-color: cornsilk;
 }
 
 .board .countdown{
@@ -114,12 +106,11 @@ main .credit .button{
 }
 
 .sidebar {
-    border: 1px solid red;
     position: relative;
     width: 240px;
     height: 720px;
     transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-    background-color: darkgray;
+    background-color: rgb(40, 40, 40);
 }
 
 .right-animation {

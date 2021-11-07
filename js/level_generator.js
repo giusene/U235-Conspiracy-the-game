@@ -6,19 +6,55 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard) => {
         let newLine = [];
         for (let box of lines) {
             let objectBox;
-            if (box === 0) {
-                objectBox = {
-                    block: false,
-                    dot: true,
-                    fruit: false
-                }
-
-            } else {
-                objectBox = {
-                    block: true,
-                    dot: false,
-                    fruit: false
-                }
+            switch (box) {
+                case 0:
+                    objectBox = {
+                        block: false,
+                        dot: true,
+                        fruit: false,
+                        cssclass: 'dot'
+                    }
+                break;
+                case 1:
+                    objectBox = {
+                        block: true,
+                        dot: false,
+                        fruit: false,
+                        cssclass: 'block-true'
+                    }
+                break;
+                case 2:
+                    objectBox = {
+                        block: true,
+                        dot: false,
+                        fruit: false,
+                        cssclass: 'bridge'
+                    }
+                break;
+                case 3:
+                    objectBox = {
+                        block: true,
+                        dot: false,
+                        fruit: false,
+                        cssclass: 'liquid'
+                    }
+                break;
+                case 4:
+                    objectBox = {
+                        block: true,
+                        dot: false,
+                        fruit: false,
+                        cssclass: 'bin'
+                    }
+                break;
+                case 5:
+                    objectBox = {
+                        block: true,
+                        dot: false,
+                        fruit: false,
+                        cssclass: 'wall-little'
+                    }
+                break;
             }
             newLine.push(objectBox);
         }
@@ -28,7 +64,8 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard) => {
     board[1][1] = {
         block: false,
         dot: false,
-        fruit: false
+        fruit: false,
+        cssclass: 'dot'
     }
 
     let zIndexForLines = 1;
@@ -44,7 +81,7 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard) => {
                 dotDiv.classList.add('dot-true');
             }
             if (board[i][ii].block) {
-                dotDiv.classList.add('block-true');
+                dotDiv.classList.add(board[i][ii].cssclass);
                 dotDiv.style.zIndex = parseInt('' + zIndexForLines + zIndexForBlock);
             }
             boardDiv.appendChild(dotDiv);
@@ -59,18 +96,18 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard) => {
 
 const levels = [
     [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        [3, 3, 3, 3, 1, 1, 1, 1, 3, 3, 3, 3],
+        [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+        [3, 0, 1, 1, 0, 2, 2, 0, 1, 1, 0, 3],
+        [3, 0, 1, 1, 0, 3, 3, 0, 4, 4, 0, 3],
+        [3, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 3],
+        [3, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 3],
+        [3, 0, 4, 4, 0, 0, 0, 0, 1, 1, 0, 3],
+        [3, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 3],
+        [3, 0, 1, 1, 0, 3, 3, 0, 1, 1, 0, 3],
+        [3, 0, 1, 1, 0, 3, 3, 0, 1, 1, 0, 3],
+        [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+        [3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3]
     ],
     [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
