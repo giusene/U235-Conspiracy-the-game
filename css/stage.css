@@ -84,6 +84,20 @@
     position: absolute;
 }
 
+.computer {
+    overflow: visible;
+}
+
+.computer::before {
+    content: '';
+    background: url(../img/computer.png) no-repeat bottom left;
+    width: 60px;
+    height: 90px;
+    bottom: 0px;
+    right: 0px;
+    position: absolute;
+}
+
 .bridge {
     background: url(../img/bridge.png) no-repeat bottom left;
     width: 60px;

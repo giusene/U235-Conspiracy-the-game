@@ -55,6 +55,14 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard) => {
                         cssclass: 'wall-little'
                     }
                 break;
+                case 6:
+                    objectBox = {
+                        block: true,
+                        dot: false,
+                        fruit: false,
+                        cssclass: 'computer'
+                    }
+                break;
             }
             newLine.push(objectBox);
         }
@@ -99,10 +107,10 @@ const levels = [
         [3, 3, 3, 3, 1, 1, 1, 1, 3, 3, 3, 3],
         [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
         [3, 0, 1, 1, 0, 2, 2, 0, 1, 1, 0, 3],
-        [3, 0, 1, 1, 0, 3, 3, 0, 4, 4, 0, 3],
+        [3, 0, 1, 1, 0, 3, 3, 0, 4, 6, 0, 3],
         [3, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 3],
         [3, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 3],
-        [3, 0, 4, 4, 0, 0, 0, 0, 1, 1, 0, 3],
+        [3, 0, 4, 6, 0, 0, 0, 0, 1, 1, 0, 3],
         [3, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 3],
         [3, 0, 1, 1, 0, 3, 3, 0, 1, 1, 0, 3],
         [3, 0, 1, 1, 0, 3, 3, 0, 1, 1, 0, 3],
