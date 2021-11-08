@@ -1,4 +1,7 @@
 export const hero = (boardDiv, board, score, scoreBoard, level) => {
+    // calcolo per responsive
+    const checkWidth = document.getElementById('0-0').clientWidth
+
     scoreBoard.textContent = score;
     let pacmanPositionX = 1;
     let pacmanPositionY = 1;
@@ -6,8 +9,8 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
     const pacman = document.createElement('div');
     pacman.setAttribute('id', '#pacman');
     pacman.classList.add('pacman-stop');
-    pacman.style.top = '60px';
-    pacman.style.left = '60px';
+    pacman.style.top = checkWidth + 'px';
+    pacman.style.left = checkWidth + 'px';
     boardDiv.appendChild(pacman);
     let pacmanTop = pacman.style.top;
     let pacmanTopPx = parseInt(pacmanTop.substring(0, pacmanTop.length - 2));
@@ -23,8 +26,8 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
     // FUNZIONE CHE DETERMINA LA POSIZIONE NELLO SCHEMA (ARRAY)
     const boardPosition = () => {
         let positionX, positionY;
-        positionX = (Math.round(pacmanLeftPx / 60));
-        positionY = (Math.round(pacmanTopPx / 60));
+        positionX = (Math.round(pacmanLeftPx / checkWidth));
+        positionY = (Math.round(pacmanTopPx / checkWidth));
 
         let positionUp = positionY - 1;
         let positionDown = positionY + 1;
@@ -41,7 +44,6 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
     // FUNZIONE MANGIA PALLINE //
     const dotEating = (positionY, positionX) => {
         let dotDiv = document.getElementById(`${positionY + '-' + positionX}`);
-        let scorePrint = document.querySelector('h3');
         if (board[positionY][positionX].dot) {
             dotDiv.classList.remove('dot-true');
             board[positionY][positionX].dot = false;
@@ -63,13 +65,13 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
     const blocksBlock = (positionUp, positionDown, positionLeft, positionRight, positionX, positionY) => {
 
         if (board[positionUp][positionX].block) {
-            if (Number.isInteger(pacmanTopPx / 60)) {
+            if (Number.isInteger(pacmanTopPx / checkWidth)) {
                 up = false;
             } else {
                 up = true;
             }
         } else {
-            if (Number.isInteger(pacmanLeftPx / 60)) {
+            if (Number.isInteger(pacmanLeftPx / checkWidth)) {
                 up = true;
             } else {
                 up = false;
@@ -78,14 +80,14 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         }
 
         if (board[positionDown][positionX].block) {
-            if (Number.isInteger(pacmanTopPx / 60)) {
+            if (Number.isInteger(pacmanTopPx / checkWidth)) {
                 down = false;
             } else {
                 down = true;
             }
 
         } else {
-            if (Number.isInteger(pacmanLeftPx / 60)) {
+            if (Number.isInteger(pacmanLeftPx / checkWidth)) {
                 down = true;
             } else {
                 down = false;
@@ -94,13 +96,13 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         }
 
         if (board[positionY][positionRight].block) {
-            if (Number.isInteger(pacmanLeftPx / 60)) {
+            if (Number.isInteger(pacmanLeftPx / checkWidth)) {
                 right = false;
             } else {
                 right = true;
             }
         } else {
-            if (Number.isInteger(pacmanTopPx / 60)) {
+            if (Number.isInteger(pacmanTopPx / checkWidth)) {
                 right = true;
             } else {
                 right = false;
@@ -108,13 +110,13 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         }
 
         if (board[positionY][positionLeft].block) {
-            if (Number.isInteger(pacmanLeftPx / 60)) {
+            if (Number.isInteger(pacmanLeftPx / checkWidth)) {
                 left = false;
             } else {
                 left = true;
             }
         } else {
-            if (Number.isInteger(pacmanTopPx / 60)) {
+            if (Number.isInteger(pacmanTopPx / checkWidth)) {
                 left = true;
             } else {
                 left = false;
@@ -137,7 +139,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         // up
         if (event.keyCode === 38) {
             if (up) {
-                pacmanTopPx -= 10;
+                pacmanTopPx -= checkWidth / (checkWidth/10);
                 pacman.style.top = pacmanTopPx + 'px';
                 pacman.classList.add('rotate-up');
                 pacman.classList.remove('rotate-down', 'rotate-left', 'rotate-right');
@@ -148,7 +150,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         // down
         if (event.keyCode === 40) {
             if (down) {
-                pacmanTopPx += 10;
+                pacmanTopPx += checkWidth / (checkWidth/10);
                 pacman.style.top = pacmanTopPx + 'px';
                 pacman.classList.add('rotate-down');
                 pacman.classList.remove('rotate-left', 'rotate-up', 'rotate-right');
@@ -159,7 +161,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         // left
         if (event.keyCode === 37) {
             if (left) {
-                pacmanLeftPx -= 10;
+                pacmanLeftPx -= checkWidth / (checkWidth/10);
                 pacman.style.left = pacmanLeftPx + 'px';
                 pacman.classList.add('rotate-left');
                 pacman.classList.remove('rotate-right', 'rotate-down', 'rotate-up');
@@ -170,7 +172,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         // right
         if (event.keyCode === 39) {
             if (right) {
-                pacmanLeftPx += 10;
+                pacmanLeftPx += checkWidth / (checkWidth/10);
                 pacman.style.left = pacmanLeftPx + 'px';
                 pacman.classList.add('rotate-right');
                 pacman.classList.remove('rotate-left', 'rotate-down', 'rotate-up');
@@ -184,8 +186,8 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
     const enemy = document.createElement('div');
     enemy.classList.add('enemy');
     enemy.setAttribute('id', '#enemy');
-    enemy.style.top = '600px';
-    enemy.style.left = '600px';
+    enemy.style.top = (checkWidth*10) + 'px';
+    enemy.style.left = (checkWidth*10) + 'px';
     boardDiv.appendChild(enemy);
     let enemyTop = enemy.style.top;
     let enemyTopPx = parseInt(enemyTop.substring(0, enemyTop.length - 2));
@@ -195,14 +197,14 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
     // FUNZIONE MOVIMENTO NEMICI //
     const enemiesAi = () => {
         // posizione nemico
-        let enemyPositionX = (Math.round(enemyLeftPx / 60));
-        let enemyPositionY = (Math.round(enemyTopPx / 60));
+        let enemyPositionX = (Math.round(enemyLeftPx / checkWidth));
+        let enemyPositionY = (Math.round(enemyTopPx / checkWidth));
 
         let checkPosition = [
             {
                 diff: Math.abs(pacmanPositionY - enemyPositionY),
                 left: 0,
-                top: -60,
+                top: -checkWidth,
                 positionY: -1,
                 positionX: 0,
                 enemyX: true,
@@ -212,7 +214,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
             {
                 diff: Math.abs(pacmanPositionY - enemyPositionY),
                 left: 0,
-                top: 60,
+                top: checkWidth,
                 positionY: 1,
                 positionX: 0,
                 enemyX: true,
@@ -221,7 +223,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
             },
             {
                 diff: Math.abs(pacmanPositionX - enemyPositionX),
-                left: -60,
+                left: -checkWidth,
                 top: 0,
                 positionY: 0,
                 positionX: -1,
@@ -231,7 +233,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
             },
             {
                 diff: Math.abs(pacmanPositionX - enemyPositionX),
-                left: 60,
+                left: checkWidth,
                 top: 0,
                 positionY: 0,
                 positionX: 1,

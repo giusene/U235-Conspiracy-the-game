@@ -2,6 +2,12 @@ import { mainMenu } from "./main_menu.js";
 import { levelGenerator } from "./level_generator.js";
 
 export const stageRender = () => {
+    // create controls for mobile
+    const controls = document.createElement('div');
+    controls.setAttribute('id', 'controls');
+    controls.classList.add('controls');
+
+    // create sidebar
     const sideBar = document.createElement('div');
     sideBar.setAttribute('id', 'sidebar');
     sideBar.classList.add('sidebar');
@@ -44,6 +50,7 @@ export const stageRender = () => {
 
     const timerFunc = setInterval(timerCount, 1000)
 
+    mainContainer.parentElement.appendChild(controls);
     mainContainer.appendChild(sideBar);
     mainContainer.appendChild(boardDiv);
     boardDiv.appendChild(countdown);

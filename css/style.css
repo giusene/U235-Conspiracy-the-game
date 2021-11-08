@@ -31,11 +31,11 @@ body {
 }
 
 main {
-    width: 960px;
+    width: 100%;
     height: 720px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
@@ -84,10 +84,11 @@ main .credit .button{
 .board {
     width: 720px;
     height: 720px;
-    background-size: cover;
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    gap: 0px;
     transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
@@ -119,4 +120,15 @@ main .credit .button{
 
 .left-animation {
     left: 0px !important;
+}
+
+
+.controls {
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    height: 100px;
+    background: #fff;
+    bottom: 20px;
+    display: none;
 }

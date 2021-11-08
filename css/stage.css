@@ -1,8 +1,9 @@
 .dot {
-    width: 60px;
+    width: 100%;
     height: 60px;
     position: relative;
     background: url(../img/floor.png) no-repeat;
+    background-size: cover;
 }
 
 .dot-true::before {
@@ -34,8 +35,8 @@
 
 .fruit::after{
     content: '';
-    width: 40px;
-    height: 40px;
+    width: 80%;
+    height: 80%;
     position: absolute;
     background: brown;
     top: 10px;
@@ -49,11 +50,12 @@
 .block-true::before {
     content: '';
     background: url(../img/wall-big.png) no-repeat bottom left;
-    width: 90px;
-    height: 90px;
+    width: 100%;
+    height: 150%;
     bottom: 0px;
     left: 0px;
     position: absolute;
+    background-size: cover;
 }
 
 .wall-little {
@@ -63,8 +65,9 @@
 .wall-little::before {
     content: '';
     background: url(../img/wall-little.png) no-repeat bottom left;
-    width: 90px;
-    height: 90px;
+    background-size: cover;
+    width: 100%;
+    height: 150%;
     bottom: 0px;
     left: 0px;
     position: absolute;
@@ -77,8 +80,9 @@
 .bin::before {
     content: '';
     background: url(../img/bin.png) no-repeat bottom left;
-    width: 63px;
-    height: 90px;
+    background-size: cover;
+    width: 105%;
+    height: 153%;
     bottom: 0px;
     right: 0px;
     position: absolute;
@@ -91,8 +95,9 @@
 .computer::before {
     content: '';
     background: url(../img/computer.png) no-repeat bottom left;
-    width: 60px;
-    height: 90px;
+    background-size: cover;
+    width: 100%;
+    height: 144%;
     bottom: 0px;
     right: 0px;
     position: absolute;
@@ -100,14 +105,16 @@
 
 .bridge {
     background: url(../img/bridge.png) no-repeat bottom left;
-    width: 60px;
-    height: 60px;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
 }
 
 .liquid {
     background: url(../img/liquid.png) no-repeat bottom left;
-    width: 60px;
-    height: 60px;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
 }
 
 /*  */
