@@ -12,6 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    font-family: 'Ceviche One', cursive;
 }
 
 .display-none {
@@ -108,10 +109,27 @@ main .credit .button{
 
 .sidebar {
     position: relative;
+    background: url(../img/sidebar.png) no-repeat;
+    background-size: cover;
     width: 240px;
     height: 720px;
     transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
     background-color: rgb(40, 40, 40);
+}
+
+.exit-btn {
+    position: absolute;
+    width: 65px;
+    height: 67px;
+    bottom: 45px;
+    left: 20px;
+    background: url(../img/exit_btn.png) no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.exit-btn:hover {
+    background: url(../img/exit_btn_hover.png) no-repeat;
 }
 
 .right-animation {
@@ -128,7 +146,72 @@ main .credit .button{
     z-index: 9999;
     width: 100%;
     height: 100px;
-    background: #fff;
     bottom: 20px;
+    justify-content: space-between;
     display: none;
+    padding: 0 20px;
+    align-items: center;
+}
+
+.controls .controls-sx-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.controls .controls-dx-box{
+    display: flex;
+}
+
+.controls div a{
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #fff;
+    margin: 2px;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+}
+
+@media all and (max-width: 990px) {
+    body {
+        height: auto;
+    }
+
+    main {
+        flex-direction: column !important;
+        justify-content: flex-start;
+    }
+    .controls {
+        display: flex;
+    }
+    
+}
+
+@media all and (max-width: 721px) {
+    body {
+        overflow: hidden;
+    }
+    .board {
+        width: 240px;
+        height: 240px;
+    }    
+    .sidebar{
+        /* background: url(../img/logo_resp.png) no-repeat; */
+        height: 150px;
+        background-size: cover;
+    }
+    .score-board{
+        top: 0px !important;
+    }
+
+    .exit-btn{
+        width: 35px;
+        height: 35px;
+    }
+
+    .dot-true::before {
+        width: 3px !important;
+        height: 3px !important;
+        top: 5px !important;
+        left: 6px !important;
+    }
 }

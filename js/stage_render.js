@@ -7,6 +7,32 @@ export const stageRender = () => {
     controls.setAttribute('id', 'controls');
     controls.classList.add('controls');
 
+    // create controls for mobile
+    const controlsSxBox = document.createElement('div');
+    controlsSxBox.setAttribute('id', 'controls-sx-box');
+    controlsSxBox.classList.add('controls-sx-box');
+
+    const controlsUp = document.createElement('a');
+    controlsUp.setAttribute('id', 'controls-up');
+    controlsUp.classList.add('controls-up');
+    const controlsDown = document.createElement('a');
+    controlsDown.setAttribute('id', 'controls-down');
+    controlsDown.classList.add('controls-down');
+    
+    // create controls for mobile
+    const controlsDxBox = document.createElement('div');
+    controlsDxBox.setAttribute('id', 'controls-dx-box');
+    controlsDxBox.classList.add('controls-dx-box');
+
+    const controlsLeft = document.createElement('a');
+    controlsLeft.setAttribute('id', 'controls-left');
+    controlsLeft.classList.add('controls-left');
+    const controlsRight = document.createElement('a');
+    controlsRight.setAttribute('id', 'controls-right');
+    controlsRight.classList.add('controls-right');
+
+
+
     // create sidebar
     const sideBar = document.createElement('div');
     sideBar.setAttribute('id', 'sidebar');
@@ -16,9 +42,7 @@ export const stageRender = () => {
     // create exit button
     const exitBtn = document.createElement('a');
     exitBtn.classList.add('exit-btn');
-    exitBtn.classList.add('button');
     exitBtn.setAttribute('id', 'exit-btn');
-    exitBtn.textContent = 'exit';
 
     // create scoreboard
     const scoreBoard = document.createElement('div');
@@ -31,29 +55,20 @@ export const stageRender = () => {
     boardDiv.classList.add('board');
     boardDiv.style.right = '-2000px';
 
-    // create countdown
-    const countdown = document.createElement('div');
-    countdown.setAttribute('id', 'countdown');
-    countdown.classList.add('countdown');
+    
 
-    let countText = 3;
-    const timerCount = () => {
-        if (countText === 0) {
-            clearInterval(timerFunc)
-            countdown.textContent = 'GO!';
-            setTimeout(() => boardDiv.removeChild(countdown), 1000)
-        } else {
-            countdown.textContent = countText;
-            countText--
-        }
-    }
+    mainContainer.appendChild(controls);
 
-    const timerFunc = setInterval(timerCount, 1000)
+    controls.appendChild(controlsSxBox);
+    controls.appendChild(controlsDxBox);
 
-    mainContainer.parentElement.appendChild(controls);
+    controlsSxBox.appendChild(controlsUp);
+    controlsSxBox.appendChild(controlsDown);
+    controlsDxBox.appendChild(controlsLeft);
+    controlsDxBox.appendChild(controlsRight);
+    
     mainContainer.appendChild(sideBar);
     mainContainer.appendChild(boardDiv);
-    boardDiv.appendChild(countdown);
     sideBar.appendChild(scoreBoard);
     sideBar.appendChild(exitBtn);
 

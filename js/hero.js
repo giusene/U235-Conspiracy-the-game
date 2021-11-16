@@ -1,8 +1,38 @@
+import { levelGenerator } from "./level_generator.js";
+
 export const hero = (boardDiv, board, score, scoreBoard, level) => {
-    // calcolo per responsive
-    const checkWidth = document.getElementById('0-0').clientWidth
 
     scoreBoard.textContent = score;
+
+    // create countdown
+    const countdown = document.createElement('div');
+    countdown.setAttribute('id', 'countdown');
+    countdown.classList.add('countdown');
+    boardDiv.appendChild(countdown);
+
+    let countText = 3;
+    const timerCount = () => {
+        if (countText === 0) {
+            clearInterval(timerFunc)
+            countdown.textContent = 'GO!';
+            setTimeout(() => boardDiv.removeChild(countdown), 1000)
+            charMove(boardDiv, board, score, scoreBoard, level);
+        } else {
+            countdown.textContent = countText;
+            countText--
+        }
+    }
+
+    const timerFunc = setInterval(timerCount, 1000)
+}
+
+
+
+function charMove(boardDiv, board, score, scoreBoard, level) {
+    // calcolo per responsive
+    const checkWidth = document.getElementById('0-0').clientWidth;
+
+
     let pacmanPositionX = 1;
     let pacmanPositionY = 1;
     // PACMAN POSITION
@@ -11,7 +41,10 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
     pacman.classList.add('pacman-stop');
     pacman.style.top = checkWidth + 'px';
     pacman.style.left = checkWidth + 'px';
+    pacman.style.width = checkWidth + 'px';
+    pacman.style.height = checkWidth + 'px';
     boardDiv.appendChild(pacman);
+
     let pacmanTop = pacman.style.top;
     let pacmanTopPx = parseInt(pacmanTop.substring(0, pacmanTop.length - 2));
     let pacmanLeft = pacman.style.left;
@@ -48,11 +81,27 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
             dotDiv.classList.remove('dot-true');
             board[positionY][positionX].dot = false;
             // PUNTEGGIO
-            score++;
+            score += 10;
+
+            let checkDots = false;
+            const prova = board.forEach(element => {
+                element.filter(single => {
+                    if (single.dot === true) {
+                        checkDots = true;
+                        return
+                    }
+                })
+            });
+            if (!checkDots) {
+            boardDiv.removeChild(pacman)
+            boardDiv.removeChild(enemy)
+            levelGenerator(level+1, 3, score, boardDiv, scoreBoard);
+            }
         }
+
         // PUNTEGGIO FRUTTA
         if (board[positionY][positionX].fruit) {
-            score += 10;
+            score += 100;
             board[positionY][positionX].fruit = false;
             dotDiv.classList.remove('fruit');
         }
@@ -139,7 +188,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         // up
         if (event.keyCode === 38) {
             if (up) {
-                pacmanTopPx -= checkWidth / (checkWidth/10);
+                pacmanTopPx -= checkWidth / (checkWidth / 10);
                 pacman.style.top = pacmanTopPx + 'px';
                 pacman.classList.add('rotate-up');
                 pacman.classList.remove('rotate-down', 'rotate-left', 'rotate-right');
@@ -150,7 +199,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         // down
         if (event.keyCode === 40) {
             if (down) {
-                pacmanTopPx += checkWidth / (checkWidth/10);
+                pacmanTopPx += checkWidth / (checkWidth / 10);
                 pacman.style.top = pacmanTopPx + 'px';
                 pacman.classList.add('rotate-down');
                 pacman.classList.remove('rotate-left', 'rotate-up', 'rotate-right');
@@ -161,7 +210,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         // left
         if (event.keyCode === 37) {
             if (left) {
-                pacmanLeftPx -= checkWidth / (checkWidth/10);
+                pacmanLeftPx -= checkWidth / (checkWidth / 10);
                 pacman.style.left = pacmanLeftPx + 'px';
                 pacman.classList.add('rotate-left');
                 pacman.classList.remove('rotate-right', 'rotate-down', 'rotate-up');
@@ -172,7 +221,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
         // right
         if (event.keyCode === 39) {
             if (right) {
-                pacmanLeftPx += checkWidth / (checkWidth/10);
+                pacmanLeftPx += checkWidth / (checkWidth / 10);
                 pacman.style.left = pacmanLeftPx + 'px';
                 pacman.classList.add('rotate-right');
                 pacman.classList.remove('rotate-left', 'rotate-down', 'rotate-up');
@@ -186,8 +235,10 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
     const enemy = document.createElement('div');
     enemy.classList.add('enemy');
     enemy.setAttribute('id', '#enemy');
-    enemy.style.top = (checkWidth*10) + 'px';
-    enemy.style.left = (checkWidth*10) + 'px';
+    enemy.style.top = (checkWidth * 10) + 'px';
+    enemy.style.left = (checkWidth * 10) + 'px';
+    enemy.style.width = checkWidth + 'px';
+    enemy.style.height = checkWidth + 'px';
     boardDiv.appendChild(enemy);
     let enemyTop = enemy.style.top;
     let enemyTopPx = parseInt(enemyTop.substring(0, enemyTop.length - 2));
@@ -284,24 +335,28 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
     // FUNZIONE MOVIMENTO NEMICI TEMPORIZZATO  ////
     let enemySpeed;
     switch (level) {
-        case 0: 
-        enemySpeed = 2500;
-        break;
-        case 1: 
-        enemySpeed = 2000;
-        break;
-        case 2: 
-        enemySpeed = 1500;
-        break;
-        case 3: 
-        enemySpeed = 1000;
-        break;
-        case 4: 
-        enemySpeed = 500;
-        break;
+        case 0:
+            enemySpeed = 2500;
+            break;
+        case 1:
+            enemySpeed = 2000;
+            break;
+        case 2:
+            enemySpeed = 1500;
+            break;
+        case 3:
+            enemySpeed = 1000;
+            break;
+        case 4:
+            enemySpeed = 500;
+            break;
     }
 
-    setInterval(() => {
-        enemiesAi();
-    }, enemySpeed);
+    
+        setInterval(() => {
+            enemiesAi();
+        }, enemySpeed);
+
 }
+
+

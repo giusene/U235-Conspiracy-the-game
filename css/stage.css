@@ -1,6 +1,6 @@
 .dot {
     width: 100%;
-    height: 60px;
+    height: 100%;
     position: relative;
     background: url(../img/floor.png) no-repeat;
     background-size: cover;
@@ -122,21 +122,18 @@
     background: #ffcc00;
     z-index: 1;
     position: absolute;
-    height: 60px;
-    width: 60px; 
     border-radius: 50%;
 }
 
 .pacman {
-    background: transparent;
+    background: #ffcc00;
     z-index: 1;
     position: absolute;
-    height: 60px;
-    width: 60px;
+    border-radius: 50%;
     transition: all 0.1s linear;
 }
 
-.pacman::before, .pacman::after{
+/* .pacman::before, .pacman::after{
     content: "";
     position: absolute;
     display: block;
@@ -178,7 +175,7 @@
     50% {
         transform: rotate(0deg);
     }
-}
+} */
 .eye{
     position: absolute;
     z-index: 999;
@@ -208,19 +205,18 @@
 
 .enemy {
     position: absolute;
-    width: 60px;
-    height: 60px;
-    background: red;
-    border-radius: 50%;
+    background: url(../img/gif-hazmat.gif);
+    background-size: cover;
     z-index: 2;
     transition: all 0.3s ease-out;
 }
 
-
 .score-board {
-    padding: 20px;
-    margin-bottom: 20px;
-    min-width: 200px;
+    width: 100%;
     text-align: center;
     color: rgb(255, 255, 255);
+    position: absolute;
+    top: 260px;
+    font-size: 50px;
+    transform: rotate(3deg);
 }
