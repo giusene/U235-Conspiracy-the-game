@@ -252,6 +252,10 @@
     background-size: cover;
 }
 
+.no-live {
+    background: url('../img/nolive_heart.png') no-repeat;
+    background-size: cover;
+}
 
 .win_div{
     width: 500px;

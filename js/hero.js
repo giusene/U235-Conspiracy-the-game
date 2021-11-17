@@ -1,9 +1,9 @@
 import { levelGenerator } from "./level_generator.js";
 
-export const hero = (boardDiv, board, score, scoreBoard, level, levelBoard) => {
+export const hero = (boardDiv, board, score, scoreBoard, level, levelBoard, lives) => {
 
     scoreBoard.textContent = score;
-    levelBoard.textContent = `level: ${level+1}`
+    levelBoard.textContent = `level: ${level + 1}`
 
     // create countdown
     const countdown = document.createElement('div');
@@ -17,7 +17,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level, levelBoard) => {
             clearInterval(timerFunc)
             countdown.textContent = 'GO!';
             setTimeout(() => boardDiv.removeChild(countdown), 1000)
-            charMove(boardDiv, board, score, scoreBoard, level, levelBoard);
+            charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives);
         } else {
             countdown.textContent = countText;
             countText--
@@ -29,7 +29,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level, levelBoard) => {
 
 
 
-function charMove(boardDiv, board, score, scoreBoard, level, levelBoard) {
+function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) {
     // calcolo per responsive
     const checkWidth = document.getElementById('0-0').clientWidth;
 
@@ -68,7 +68,6 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard) {
         let positionLeft = positionX - 1;
         let positionRight = positionX + 1;
 
-        console.log('PACMAN X: ' + positionX + ' PACAMAN Y: ' + positionY);
         blocksBlock(positionUp, positionDown, positionLeft, positionRight, positionX, positionY);
         dotEating(positionY, positionX);
         pacmanPositionX = positionX;
@@ -94,16 +93,17 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard) {
                 })
             });
             if (!checkDots) {
-            boardDiv.removeChild(pacman)
-            boardDiv.removeChild(enemy)
-            const winDiv = document.createElement('div');
-            winDiv.classList.add('win_div');
-            winDiv.textContent = 'COMPLIMENTI... PREPARATI AL PROSSIMO LIVELLO';
-            boardDiv.appendChild(winDiv);
-            setTimeout( () => {
-                levelGenerator(level+1, 3, score, boardDiv, scoreBoard, levelBoard);
-            }, 5000)
-            
+                boardDiv.removeChild(pacman)
+                boardDiv.removeChild(enemy)
+                const winDiv = document.createElement('div');
+                winDiv.classList.add('win_div');
+                winDiv.textContent = 'COMPLIMENTI... PREPARATI AL PROSSIMO LIVELLO';
+                boardDiv.appendChild(winDiv);
+                setTimeout(() => {
+                    clearInterval(enemyIntervall);
+                    levelGenerator(level + 1, lives, score, boardDiv, scoreBoard, levelBoard);
+                }, 5000)
+
             }
         }
 
@@ -338,32 +338,55 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard) {
 
         enemy.style.top = enemyTopPx + 'px';
         enemy.style.left = enemyLeftPx + 'px';
+
+        if (enemyPositionX === pacmanPositionX && enemyPositionY === pacmanPositionY) {
+            boardDiv.removeChild(pacman)
+            boardDiv.removeChild(enemy)
+            const winDiv = document.createElement('div');
+            winDiv.classList.add('win_div');
+            boardDiv.appendChild(winDiv);
+            lives--
+            if (lives === 0) {
+                clearInterval(enemyIntervall);
+                winDiv.textContent = 'HAI PERSO!!!';
+            } else {
+                clearInterval(enemyIntervall);
+                winDiv.textContent = 'PRESO!!!';
+                const livesDiv = document.getElementById('lives-board');
+                const heart = livesDiv.getElementsByTagName('div');
+                heart[lives].classList.add('no-live')
+                setTimeout(() => {
+                    levelGenerator(level, lives, score, boardDiv, scoreBoard, levelBoard, board);
+                }, 5000)
+            }
+
+
+        }
     }
 
     // FUNZIONE MOVIMENTO NEMICI TEMPORIZZATO  ////
-    let enemySpeed;
-    switch (level) {
-        case 0:
-            enemySpeed = 2500;
-            break;
-        case 1:
-            enemySpeed = 2000;
-            break;
-        case 2:
-            enemySpeed = 1500;
-            break;
-        case 3:
-            enemySpeed = 1000;
-            break;
-        case 4:
-            enemySpeed = 500;
-            break;
+    const enemyLevel = (level) => {
+        switch (level) {
+            case 0:
+                return 2000;
+            case 1:
+                return 1500;
+            case 2:
+                return 1000;
+            case 3:
+                return 500;
+            case 4:
+                return 300;
+        }
     }
 
-    
+    const enemyIntervall = (speed) => {
         setInterval(() => {
             enemiesAi();
-        }, enemySpeed);
+        }, speed);
+    }
+
+    enemyIntervall(enemyLevel(level));
 
 }
 

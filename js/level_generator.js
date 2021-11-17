@@ -1,8 +1,8 @@
 import { hero } from './hero.js';
 
-export const levelGenerator = (level, lives, score, boardDiv, scoreBoard, levelBoard) => {
-    const board = [];
-    for (let lines of levels[level]) {
+export const levelGenerator = (level, lives, score, boardDiv, scoreBoard, levelBoard, board = []) => {
+    if (board.length === 0) {
+        for (let lines of levels[level]) {
         let newLine = [];
         for (let box of lines) {
             let objectBox;
@@ -75,6 +75,7 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard, levelB
         fruit: false,
         cssclass: 'dot'
     }
+}
 
     boardDiv.innerHTML = '';
 
@@ -98,7 +99,7 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard, levelB
 
         }
     }
-    hero(boardDiv, board, score, scoreBoard, level, levelBoard);
+    hero(boardDiv, board, score, scoreBoard, level, levelBoard, lives);
 }
 
 
