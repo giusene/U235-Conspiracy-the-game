@@ -220,3 +220,48 @@
     font-size: 50px;
     transform: rotate(3deg);
 }
+
+.level-board {
+    position: absolute;
+    top: 405px;
+    left: 65px;
+    color: #000;
+    font-size: 40px;
+    transform: rotate(6deg);
+    text-align: center;
+}
+
+
+.lives-board {
+    position: absolute;
+    top: 460px;
+    left: 45px;
+    color: #000;
+    font-size: 40px;
+    transform: rotate(8deg);
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    width: 120px;
+}
+
+.live {
+    width: 30px;
+    height: 30px;
+    background: url('../img/live_heart.png') no-repeat;
+    background-size: cover;
+}
+
+
+.win_div{
+    width: 500px;
+    height: 500px;
+    background: #ffcc00;
+    position: absolute;
+    z-index: 99999;
+    top: 50%;
+    margin: -250px;
+    left: 50%;
+    margin-left: -250px;
+    color: #000;
+}

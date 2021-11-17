@@ -1,6 +1,6 @@
 import { hero } from './hero.js';
 
-export const levelGenerator = (level, lives, score, boardDiv, scoreBoard) => {
+export const levelGenerator = (level, lives, score, boardDiv, scoreBoard, levelBoard) => {
     const board = [];
     for (let lines of levels[level]) {
         let newLine = [];
@@ -76,6 +76,8 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard) => {
         cssclass: 'dot'
     }
 
+    boardDiv.innerHTML = '';
+
     let zIndexForLines = 1;
     for (let i = 0; i < board.length; i++) {
         let zIndexForBlock = 30;
@@ -96,7 +98,7 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard) => {
 
         }
     }
-    hero(boardDiv, board, score, scoreBoard, level);
+    hero(boardDiv, board, score, scoreBoard, level, levelBoard);
 }
 
 
@@ -104,6 +106,19 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard) => {
 
 const levels = [
     [
+        [3, 3, 3, 3, 1, 1, 1, 1, 3, 3, 3, 3],
+        [3, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 3],
+        [3, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 3],
+        [3, 1, 1, 1, 1, 3, 3, 1, 4, 6, 1, 3],
+        [3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3],
+        [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3],
+        [3, 1, 4, 6, 1, 1, 1, 1, 1, 1, 1, 3],
+        [3, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 3],
+        [3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3],
+        [3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3],
+        [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3],
+        [3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3]
+    ],[
         [3, 3, 3, 3, 1, 1, 1, 1, 3, 3, 3, 3],
         [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
         [3, 0, 1, 1, 0, 2, 2, 0, 1, 1, 0, 3],

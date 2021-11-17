@@ -1,8 +1,9 @@
 import { levelGenerator } from "./level_generator.js";
 
-export const hero = (boardDiv, board, score, scoreBoard, level) => {
+export const hero = (boardDiv, board, score, scoreBoard, level, levelBoard) => {
 
     scoreBoard.textContent = score;
+    levelBoard.textContent = `level: ${level+1}`
 
     // create countdown
     const countdown = document.createElement('div');
@@ -16,7 +17,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
             clearInterval(timerFunc)
             countdown.textContent = 'GO!';
             setTimeout(() => boardDiv.removeChild(countdown), 1000)
-            charMove(boardDiv, board, score, scoreBoard, level);
+            charMove(boardDiv, board, score, scoreBoard, level, levelBoard);
         } else {
             countdown.textContent = countText;
             countText--
@@ -28,7 +29,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level) => {
 
 
 
-function charMove(boardDiv, board, score, scoreBoard, level) {
+function charMove(boardDiv, board, score, scoreBoard, level, levelBoard) {
     // calcolo per responsive
     const checkWidth = document.getElementById('0-0').clientWidth;
 
@@ -95,7 +96,14 @@ function charMove(boardDiv, board, score, scoreBoard, level) {
             if (!checkDots) {
             boardDiv.removeChild(pacman)
             boardDiv.removeChild(enemy)
-            levelGenerator(level+1, 3, score, boardDiv, scoreBoard);
+            const winDiv = document.createElement('div');
+            winDiv.classList.add('win_div');
+            winDiv.textContent = 'COMPLIMENTI... PREPARATI AL PROSSIMO LIVELLO';
+            boardDiv.appendChild(winDiv);
+            setTimeout( () => {
+                levelGenerator(level+1, 3, score, boardDiv, scoreBoard, levelBoard);
+            }, 5000)
+            
             }
         }
 

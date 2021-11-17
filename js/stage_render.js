@@ -49,6 +49,29 @@ export const stageRender = () => {
     scoreBoard.classList.add('score-board');
     scoreBoard.setAttribute('id', 'score-board');
 
+    const levelBoard = document.createElement('div');
+    levelBoard.classList.add('level-board');
+    levelBoard.setAttribute('id', 'level-board');
+
+
+    const livesBoard = document.createElement('div');
+    livesBoard.classList.add('lives-board');
+    livesBoard.setAttribute('id', 'lives-board');
+
+    const liveOne = document.createElement('div');
+    liveOne.classList.add('live');
+    livesBoard.appendChild(liveOne);
+
+    const liveTwo = document.createElement('div');
+    liveTwo.classList.add('live');
+    livesBoard.appendChild(liveTwo);
+
+    const liveThree = document.createElement('div');
+    liveThree.classList.add('live');
+    livesBoard.appendChild(liveThree);
+
+
+
     // create board
     const boardDiv = document.createElement('div');
     boardDiv.setAttribute('id', 'board');
@@ -70,6 +93,8 @@ export const stageRender = () => {
     mainContainer.appendChild(sideBar);
     mainContainer.appendChild(boardDiv);
     sideBar.appendChild(scoreBoard);
+    sideBar.appendChild(levelBoard);
+    sideBar.appendChild(livesBoard);
     sideBar.appendChild(exitBtn);
 
     setTimeout(() => {
@@ -89,7 +114,7 @@ export const stageRender = () => {
         }, 1000)
     })
 
-    levelGenerator(0, 3, 0, boardDiv, scoreBoard);
+    levelGenerator(0, 3, 0, boardDiv, scoreBoard, levelBoard);
 
 }
 
