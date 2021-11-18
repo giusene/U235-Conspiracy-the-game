@@ -100,11 +100,12 @@ main .credit .button{
     width: 740px;
     height: 720px;
     z-index: 9999;
-    color: #fff;
-    font-size: 70px;
+    color: #d5d920;
+    font-size: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-shadow: 4px 2px 0px rgba(0, 0, 0, 1);
 }
 
 .sidebar {

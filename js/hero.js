@@ -29,9 +29,15 @@ export const hero = (boardDiv, board, score, scoreBoard, level, levelBoard, live
 
 
 
+
+
+
+
 function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) {
     // calcolo per responsive
     const checkWidth = document.getElementById('0-0').clientWidth;
+
+
 
 
     let pacmanPositionX = 1;
@@ -79,6 +85,8 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         let dotDiv = document.getElementById(`${positionY + '-' + positionX}`);
         if (board[positionY][positionX].dot) {
             dotDiv.classList.remove('dot-true');
+            pacman.classList.add('pacman')
+            setTimeout(()=>{pacman.classList.remove('pacman')}, 200)
             board[positionY][positionX].dot = false;
             // PUNTEGGIO
             score += 10;
@@ -97,10 +105,11 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
                 boardDiv.removeChild(enemy)
                 const winDiv = document.createElement('div');
                 winDiv.classList.add('win_div');
-                winDiv.textContent = 'COMPLIMENTI... PREPARATI AL PROSSIMO LIVELLO';
+                winDiv.textContent = 'COMPLIMENTI!';
                 boardDiv.appendChild(winDiv);
                 setTimeout(() => {
                     clearInterval(enemyIntervall);
+                    clearInterval(fruitTimer);
                     levelGenerator(level + 1, lives, score, boardDiv, scoreBoard, levelBoard);
                 }, 5000)
 
@@ -110,6 +119,8 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         // PUNTEGGIO FRUTTA
         if (board[positionY][positionX].fruit) {
             score += 100;
+            pacman.classList.add('pacman')
+            setTimeout(()=>{pacman.classList.remove('pacman')}, 200)
             board[positionY][positionX].fruit = false;
             dotDiv.classList.remove('fruit');
         }
@@ -186,13 +197,13 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
     document.onkeyup = arrowUp;
 
     function arrowUp() {
-        pacman.classList.remove('pacman');
-        pacman.classList.add('pacman-stop');
+        // pacman.classList.remove('pacman');
+        // pacman.classList.add('pacman-stop');
     }
 
     function arrowPress(event) {
-        pacman.classList.add('pacman');
-        pacman.classList.remove('pacman-stop');
+        // pacman.classList.add('pacman');
+        // pacman.classList.remove('pacman-stop');
         // up
         if (event.keyCode === 38) {
             if (up) {
@@ -336,6 +347,9 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
             }
         }
 
+        ///////// CONDIZIONE PER MOVIMENTO CSS NEMICO
+        // if ()
+
         enemy.style.top = enemyTopPx + 'px';
         enemy.style.left = enemyLeftPx + 'px';
 
@@ -348,8 +362,10 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
             lives--
             if (lives === 0) {
                 clearInterval(enemyIntervall);
-                winDiv.textContent = 'HAI PERSO!!!';
+                clearInterval(fruitTimer);
+                winDiv.textContent = 'GAME OVER';
             } else {
+                clearInterval(fruitTimer);
                 clearInterval(enemyIntervall);
                 winDiv.textContent = 'PRESO!!!';
                 const livesDiv = document.getElementById('lives-board');
@@ -380,14 +396,37 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         }
     }
 
-    const enemyIntervall = (speed) => {
+    const enemyIntervall =
         setInterval(() => {
             enemiesAi();
-        }, speed);
+        }, enemyLevel(level));
+
+    // FUNZIONE FRUTTA
+    
+
+    const checkBlock = () => {
+        let firstRandom = randomIndex(board.length);
+        let secondRandom = randomIndex(board.length);
+        if (!board[firstRandom][secondRandom].block) {
+            let dotDiv = document.getElementById(`${firstRandom + '-' + secondRandom}`);
+            dotDiv.classList.add('fruit');
+            board[firstRandom][secondRandom].fruit = true;
+            setTimeout(() => {
+                dotDiv.classList.remove('fruit');
+                board[firstRandom][secondRandom].fruit = false;
+            }, 5000)
+        }
     }
 
-    enemyIntervall(enemyLevel(level));
+    const fruitTimer =
+        setInterval(() => {
+            checkBlock();
+        }, 10000)
 
 }
 
 
+
+const randomIndex = (maxLimit) => {
+    return Math.floor(Math.random() * maxLimit)
+}
