@@ -65,11 +65,11 @@
 
 .wall-little::before {
     content: '';
-    background: url(../img/wall-little.png) no-repeat bottom left;
+    background: url(../img/bidone_standard.png) no-repeat bottom left;
     background-size: cover;
     width: 100%;
-    height: 150%;
-    bottom: 0px;
+    height: 100%;
+    bottom: 20%;
     left: 0px;
     position: absolute;
 }
@@ -80,10 +80,10 @@
 
 .bin::before {
     content: '';
-    background: url(../img/bin.png) no-repeat bottom left;
+    background: url(../img/bidone_corto.png) no-repeat bottom left;
     background-size: cover;
-    width: 105%;
-    height: 153%;
+    width: 100%;
+    height: 148%;
     bottom: 0px;
     right: 0px;
     position: absolute;
@@ -224,4 +224,5 @@
     color: #d5d920;
     font-size: 90px;
     text-shadow: 4px 2px 0px rgba(0, 0, 0, 1);
+    text-align: center;
 }

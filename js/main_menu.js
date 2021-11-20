@@ -5,7 +5,7 @@ export const mainMenu = (titleStart, containerStart) => {
     title.classList.add('title');
     title.setAttribute('id', 'title');
     title.style.top = titleStart;
-    title.textContent = 'U-235 CONSPIRACY';
+    title.textContent = '';
     
     const container = document.createElement('div');
     container.classList.add('container');
@@ -25,7 +25,8 @@ export const mainMenu = (titleStart, containerStart) => {
     const creditDiv = document.createElement('div');
     creditDiv.classList.add('credit');
     creditDiv.setAttribute('id', 'credit-div');
-    creditDiv.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    creditDiv.innerHTML = `<div class="credit-name""><div>Coding:<br>Giuseppe Senettone</div>
+    <div>Graphics:<br>Roberto</div></div>`;
 
     const creditBack = document.createElement('a');
     creditBack.classList.add('button');

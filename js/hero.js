@@ -105,7 +105,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
                 boardDiv.removeChild(enemy)
                 const winDiv = document.createElement('div');
                 winDiv.classList.add('win_div');
-                winDiv.textContent = 'COMPLIMENTI!';
+                winDiv.textContent = 'STAGE CLEAR!';
                 boardDiv.appendChild(winDiv);
                 setTimeout(() => {
                     clearInterval(enemyIntervall);
@@ -364,6 +364,9 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
                 clearInterval(enemyIntervall);
                 clearInterval(fruitTimer);
                 winDiv.textContent = 'GAME OVER';
+                const livesDiv = document.getElementById('lives-board');
+                const heart = livesDiv.getElementsByTagName('div');
+                heart[lives].classList.add('no-live')
             } else {
                 clearInterval(fruitTimer);
                 clearInterval(enemyIntervall);

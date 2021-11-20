@@ -102,7 +102,15 @@ export const levelGenerator = (level, lives, score, boardDiv, scoreBoard, levelB
     hero(boardDiv, board, score, scoreBoard, level, levelBoard, lives);
 }
 
-
+/**
+ *  0 = Pavimento
+ *  1 = Muro
+ *  2 = Ponte
+ *  3 = Liquido
+ *  4 = Bidone con occhi
+ *  5 = Bidone standard
+ *  6 = Computer
+ */
 
 
 const levels = [
@@ -114,7 +122,7 @@ const levels = [
         [3, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 3],
         [3, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 3],
         [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
-        [3, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 3],
+        [3, 0, 1, 0, 5, 4, 0, 0, 1, 1, 0, 3],
         [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
         [3, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 3],
         [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],

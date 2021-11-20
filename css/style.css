@@ -5,7 +5,11 @@
 }
 
 body {
-    background: #000;
+    background: url(../img/sfondo.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000;
     color: #fff;
     height: 100vh;
     display: flex;
@@ -20,15 +24,29 @@ body {
 }
 
 .button {
-    border: 1px solid red;
     width: 200px;
     height: 60px;
-    line-height: 60px;
     text-align: center;
     margin: 20px;
-    color: #fff;
+    color: #000;
+    font-size: 50px;
     text-decoration: none;
+    cursor: pointer;
+    background: #d5d920;
+    border-radius: 20px;
+    border: 4px solid #000;
+    line-height: 50px;
+}
 
+.button:hover {
+    background: #000;
+    font-size: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #d5d920;
+    border-radius: 20px;
+    border: 4px solid #000;
+    line-height: 50px;
 }
 
 main {
@@ -63,7 +81,7 @@ main .container {
 
 main .credit {
     background: #000;
-    width: 100%;
+    width: 800px;
     height: 400px;
     padding: 20px;
     display: flex;
@@ -76,7 +94,6 @@ main .credit {
 }
 
 main .credit .button{
-    border: 1px solid red;
     position: absolute;
     top: 20px;
     right: 20px;
@@ -214,5 +231,17 @@ main .credit .button{
         height: 3px !important;
         top: 5px !important;
         left: 6px !important;
+    }
+
+    .board .countdown{
+        width: 240px;
+        height: 240px;
+        font-size: 50px;
+    }
+    .win_div{
+        width: 240px !important;
+        height: 240px !important;
+        margin: -120px !important;
+        margin-left: -120px !important;
     }
 }
