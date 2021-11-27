@@ -52,6 +52,10 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
     pacman.style.height = checkWidth + 'px';
     boardDiv.appendChild(pacman);
 
+    checkBoardDiv = boardDiv;
+    checkPacMan = pacman;
+
+
     let pacmanTop = pacman.style.top;
     let pacmanTopPx = parseInt(pacmanTop.substring(0, pacmanTop.length - 2));
     let pacmanLeft = pacman.style.left;
@@ -86,7 +90,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         if (board[positionY][positionX].dot) {
             dotDiv.classList.remove('dot-true');
             pacman.classList.add('pacman')
-            setTimeout(()=>{pacman.classList.remove('pacman')}, 200)
+            setTimeout(() => { pacman.classList.remove('pacman') }, 200)
             board[positionY][positionX].dot = false;
             // PUNTEGGIO
             score += 10;
@@ -120,7 +124,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         if (board[positionY][positionX].fruit) {
             score += 100;
             pacman.classList.add('pacman')
-            setTimeout(()=>{pacman.classList.remove('pacman')}, 200)
+            setTimeout(() => { pacman.classList.remove('pacman') }, 200)
             board[positionY][positionX].fruit = false;
             dotDiv.classList.remove('fruit');
         }
@@ -248,6 +252,39 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
             }
         }
 
+        if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
+            event.preventDefault();
+            try {
+                checkBoardDiv.removeChild(checkPacMan);
+                checkBoardDiv.removeChild(checkEnemy);
+                const winDiv = document.createElement('div');
+                winDiv.classList.add('win_div');
+                checkBoardDiv.appendChild(winDiv);
+                lives--
+                if (lives === 0) {
+                    clearInterval(enemyIntervall);
+                    clearInterval(fruitTimer);
+                    winDiv.textContent = 'GAME OVER';
+                    const livesDiv = document.getElementById('lives-board');
+                    const heart = livesDiv.getElementsByTagName('div');
+                    heart[lives].classList.add('no-live')
+                } else {
+                    clearInterval(fruitTimer);
+                    clearInterval(enemyIntervall);
+                    winDiv.textContent = 'PRESO!!!';
+                    const livesDiv = document.getElementById('lives-board');
+                    const heart = livesDiv.getElementsByTagName('div');
+                    heart[lives].classList.add('no-live')
+                    setTimeout(() => {
+                        levelGenerator(level, lives, score, checkBoardDiv, scoreBoard, levelBoard, board);
+                    }, 5000)
+                }
+            } catch {
+                console.warn('Stop pressing arrow keys between games :)');
+            }
+
+        }
+
     }
 
     // ENEMY POSITION
@@ -259,6 +296,9 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
     enemy.style.width = checkWidth + 'px';
     enemy.style.height = checkWidth + 'px';
     boardDiv.appendChild(enemy);
+
+    checkEnemy = enemy;
+
     let enemyTop = enemy.style.top;
     let enemyTopPx = parseInt(enemyTop.substring(0, enemyTop.length - 2));
     let enemyLeft = enemy.style.left;
@@ -353,6 +393,9 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         enemy.style.top = enemyTopPx + 'px';
         enemy.style.left = enemyLeftPx + 'px';
 
+        checkEnemyPositionX = enemyPositionX;
+        checkEnemyPositionY = enemyPositionY;
+
         if (enemyPositionX === pacmanPositionX && enemyPositionY === pacmanPositionY) {
             boardDiv.removeChild(pacman)
             boardDiv.removeChild(enemy)
@@ -405,7 +448,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         }, enemyLevel(level));
 
     // FUNZIONE FRUTTA
-    
+
 
     const checkBlock = () => {
         let firstRandom = randomIndex(board.length);
@@ -433,3 +476,11 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
 const randomIndex = (maxLimit) => {
     return Math.floor(Math.random() * maxLimit)
 }
+
+
+
+let checkEnemyPositionX;
+let checkEnemyPositionY;
+let checkPacMan;
+let checkEnemy;
+let checkBoardDiv;
