@@ -3,14 +3,14 @@
 # U-235 Consiparcy (the game)
 
 >A platform game entirely developed in Vanilla Javascript and Css.
-###Features:
+### Features:
 - Multilevel
 - Real enemy AI
 - Difficulty increase
 - Customize game levels
 
 
->this is the approach I used for creating the game levels
+>this is the approach I used to generate game levels
 ``` javascript
     /**
  *  0 = floor
