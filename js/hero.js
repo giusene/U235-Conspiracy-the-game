@@ -83,7 +83,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         dotEating(positionY, positionX);
         pacmanPositionX = positionX;
         pacmanPositionY = positionY;
-        
+
     }
 
 
@@ -201,7 +201,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         }
 
     }
-    
+
 
 
     // mobile
@@ -210,45 +210,185 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
     const mobileLeft = document.querySelector('#controls-left');
     const mobileRight = document.querySelector('#controls-right');
 
-    mobileDown.addEventListener('click', () => {
+    mobileDown.addEventListener('click', (event) => {
         if (down) {
             pacmanTopPx += checkWidth;
             pacman.style.top = pacmanTopPx + 'px';
             pacman.classList.add('rotate-down');
             pacman.classList.remove('rotate-left', 'rotate-up', 'rotate-right');
+            let pacmanPositionX = (Math.round(pacmanLeftPx / checkWidth));
+            let pacmanPositionY = (Math.round(pacmanTopPx / checkWidth));
+            if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
+                event.preventDefault();
+                try {
+                    checkBoardDiv.removeChild(checkPacMan);
+                    checkBoardDiv.removeChild(checkEnemy);
+                    const winDiv = document.createElement('div');
+                    winDiv.classList.add('win_div');
+                    checkBoardDiv.appendChild(winDiv);
+                    lives--
+                    if (lives === 0) {
+                        clearInterval(enemyIntervall);
+                        clearInterval(fruitTimer);
+                        winDiv.textContent = 'GAME OVER';
+                        const livesDiv = document.getElementById('lives-board');
+                        const heart = livesDiv.getElementsByTagName('div');
+                        heart[lives].classList.add('no-live')
+                    } else {
+                        clearInterval(fruitTimer);
+                        clearInterval(enemyIntervall);
+                        winDiv.textContent = 'PRESO!!!';
+                        const livesDiv = document.getElementById('lives-board');
+                        const heart = livesDiv.getElementsByTagName('div');
+                        heart[lives].classList.add('no-live')
+                        setTimeout(() => {
+                            levelGenerator(level, lives, score, checkBoardDiv, scoreBoard, levelBoard, board);
+                        }, 5000)
+                    }
+                } catch {
+                    console.warn('Stop pressing arrow keys between games :)');
+                }
+
+            }
             boardPosition();
         }
     })
 
-    mobileUp.addEventListener('click', () => {
+    mobileUp.addEventListener('click', (event) => {
         if (up) {
             pacmanTopPx -= checkWidth;
             pacman.style.top = pacmanTopPx + 'px';
             pacman.classList.add('rotate-up');
             pacman.classList.remove('rotate-down', 'rotate-left', 'rotate-right');
+            let pacmanPositionX = (Math.round(pacmanLeftPx / checkWidth));
+            let pacmanPositionY = (Math.round(pacmanTopPx / checkWidth));
+            if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
+                event.preventDefault();
+                try {
+                    checkBoardDiv.removeChild(checkPacMan);
+                    checkBoardDiv.removeChild(checkEnemy);
+                    const winDiv = document.createElement('div');
+                    winDiv.classList.add('win_div');
+                    checkBoardDiv.appendChild(winDiv);
+                    lives--
+                    if (lives === 0) {
+                        clearInterval(enemyIntervall);
+                        clearInterval(fruitTimer);
+                        winDiv.textContent = 'GAME OVER';
+                        const livesDiv = document.getElementById('lives-board');
+                        const heart = livesDiv.getElementsByTagName('div');
+                        heart[lives].classList.add('no-live')
+                    } else {
+                        clearInterval(fruitTimer);
+                        clearInterval(enemyIntervall);
+                        winDiv.textContent = 'PRESO!!!';
+                        const livesDiv = document.getElementById('lives-board');
+                        const heart = livesDiv.getElementsByTagName('div');
+                        heart[lives].classList.add('no-live')
+                        setTimeout(() => {
+                            levelGenerator(level, lives, score, checkBoardDiv, scoreBoard, levelBoard, board);
+                        }, 5000)
+                    }
+                } catch {
+                    console.warn('Stop pressing arrow keys between games :)');
+                }
+
+            }
             boardPosition();
         }
     })
 
-    mobileLeft.addEventListener('click', () => {
+    mobileLeft.addEventListener('click', (event) => {
         if (left) {
             pacmanLeftPx -= checkWidth;
             pacman.style.left = pacmanLeftPx + 'px';
             pacman.classList.add('rotate-left');
             pacman.classList.remove('rotate-right', 'rotate-down', 'rotate-up');
+            let pacmanPositionX = (Math.round(pacmanLeftPx / checkWidth));
+            let pacmanPositionY = (Math.round(pacmanTopPx / checkWidth));
+            if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
+                event.preventDefault();
+                try {
+                    checkBoardDiv.removeChild(checkPacMan);
+                    checkBoardDiv.removeChild(checkEnemy);
+                    const winDiv = document.createElement('div');
+                    winDiv.classList.add('win_div');
+                    checkBoardDiv.appendChild(winDiv);
+                    lives--
+                    if (lives === 0) {
+                        clearInterval(enemyIntervall);
+                        clearInterval(fruitTimer);
+                        winDiv.textContent = 'GAME OVER';
+                        const livesDiv = document.getElementById('lives-board');
+                        const heart = livesDiv.getElementsByTagName('div');
+                        heart[lives].classList.add('no-live')
+                    } else {
+                        clearInterval(fruitTimer);
+                        clearInterval(enemyIntervall);
+                        winDiv.textContent = 'PRESO!!!';
+                        const livesDiv = document.getElementById('lives-board');
+                        const heart = livesDiv.getElementsByTagName('div');
+                        heart[lives].classList.add('no-live')
+                        setTimeout(() => {
+                            levelGenerator(level, lives, score, checkBoardDiv, scoreBoard, levelBoard, board);
+                        }, 5000)
+                    }
+                } catch {
+                    console.warn('Stop pressing arrow keys between games :)');
+                }
+
+            }
             boardPosition();
         }
     })
 
-    mobileRight.addEventListener('click', () => {
+    mobileRight.addEventListener('click', (event) => {
         if (right) {
             pacmanLeftPx += checkWidth;
             pacman.style.left = pacmanLeftPx + 'px';
             pacman.classList.add('rotate-right');
             pacman.classList.remove('rotate-left', 'rotate-down', 'rotate-up');
+            
+            let pacmanPositionX = (Math.round(pacmanLeftPx / checkWidth));
+            let pacmanPositionY = (Math.round(pacmanTopPx / checkWidth));
+
+            if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
+                event.preventDefault();
+                try {
+                    checkBoardDiv.removeChild(checkPacMan);
+                    checkBoardDiv.removeChild(checkEnemy);
+                    const winDiv = document.createElement('div');
+                    winDiv.classList.add('win_div');
+                    checkBoardDiv.appendChild(winDiv);
+                    lives--
+                    if (lives === 0) {
+                        clearInterval(enemyIntervall);
+                        clearInterval(fruitTimer);
+                        winDiv.textContent = 'GAME OVER';
+                        const livesDiv = document.getElementById('lives-board');
+                        const heart = livesDiv.getElementsByTagName('div');
+                        heart[lives].classList.add('no-live')
+                    } else {
+                        clearInterval(fruitTimer);
+                        clearInterval(enemyIntervall);
+                        winDiv.textContent = 'PRESO!!!';
+                        const livesDiv = document.getElementById('lives-board');
+                        const heart = livesDiv.getElementsByTagName('div');
+                        heart[lives].classList.add('no-live')
+                        setTimeout(() => {
+                            levelGenerator(level, lives, score, checkBoardDiv, scoreBoard, levelBoard, board);
+                        }, 5000)
+                    }
+                } catch {
+                    console.warn('Stop pressing arrow keys between games :)');
+                }
+
+            }
             boardPosition();
         }
     })
+
+
     //fine mobile
 
     // FUNZIONE MOVIMENTI //
