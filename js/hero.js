@@ -213,11 +213,14 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
     mobileDown.addEventListener('click', (event) => {
         if (down) {
             pacmanTopPx += checkWidth;
+            let pacmanLeftPx = parseInt(pacman.style.left.substring(0, pacman.style.left.length-2)); 
             pacman.style.top = pacmanTopPx + 'px';
             pacman.classList.add('rotate-down');
             pacman.classList.remove('rotate-left', 'rotate-up', 'rotate-right');
+            
             let pacmanPositionX = (Math.round(pacmanLeftPx / checkWidth));
             let pacmanPositionY = (Math.round(pacmanTopPx / checkWidth));
+
             if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
                 event.preventDefault();
                 try {
@@ -257,6 +260,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
     mobileUp.addEventListener('click', (event) => {
         if (up) {
             pacmanTopPx -= checkWidth;
+            let pacmanLeftPx = parseInt(pacman.style.left.substring(0, pacman.style.left.length-2)); 
             pacman.style.top = pacmanTopPx + 'px';
             pacman.classList.add('rotate-up');
             pacman.classList.remove('rotate-down', 'rotate-left', 'rotate-right');
@@ -301,6 +305,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
     mobileLeft.addEventListener('click', (event) => {
         if (left) {
             pacmanLeftPx -= checkWidth;
+            let pacmanTopPx = parseInt(pacman.style.top.substring(0, pacman.style.top.length-2)); 
             pacman.style.left = pacmanLeftPx + 'px';
             pacman.classList.add('rotate-left');
             pacman.classList.remove('rotate-right', 'rotate-down', 'rotate-up');
@@ -345,6 +350,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
     mobileRight.addEventListener('click', (event) => {
         if (right) {
             pacmanLeftPx += checkWidth;
+            let pacmanTopPx = parseInt(pacman.style.top.substring(0, pacman.style.top.length-2)); 
             pacman.style.left = pacmanLeftPx + 'px';
             pacman.classList.add('rotate-right');
             pacman.classList.remove('rotate-left', 'rotate-down', 'rotate-up');
