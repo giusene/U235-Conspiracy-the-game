@@ -3,9 +3,9 @@ import { levelGenerator } from "./level_generator.js";
 
 export const stageRender = () => {
     // create controls for mobile
-    const controls = document.createElement('div');
-    controls.setAttribute('id', 'controls');
-    controls.classList.add('controls');
+
+    const controls = document.querySelector('#controls')
+
 
     // create controls for mobile
     const controlsSxBox = document.createElement('div');
@@ -80,7 +80,7 @@ export const stageRender = () => {
 
     
 
-    mainContainer.appendChild(controls);
+    // mainContainer.appendChild(controls);
 
     controls.appendChild(controlsSxBox);
     controls.appendChild(controlsDxBox);
@@ -105,6 +105,7 @@ export const stageRender = () => {
     exitBtn.addEventListener('click', () => {
         sideBar.classList.remove('left-animation');
         boardDiv.classList.remove('right-animation');
+        document.querySelector('#controls').innerHTML = '';
 
         setTimeout(() => {
             mainContainer.classList.remove('horizontal');

@@ -34,6 +34,7 @@ export const hero = (boardDiv, board, score, scoreBoard, level, levelBoard, live
 
 
 function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) {
+
     // calcolo per responsive
     const checkWidth = document.getElementById('0-0').clientWidth;
 
@@ -82,7 +83,11 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         dotEating(positionY, positionX);
         pacmanPositionX = positionX;
         pacmanPositionY = positionY;
+        
     }
+
+
+
 
     // FUNZIONE MANGIA PALLINE //
     const dotEating = (positionY, positionX) => {
@@ -194,7 +199,57 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
                 left = false;
             }
         }
+
     }
+    
+
+
+    // mobile
+    const mobileUp = document.querySelector('#controls-up');
+    const mobileDown = document.querySelector('#controls-down');
+    const mobileLeft = document.querySelector('#controls-left');
+    const mobileRight = document.querySelector('#controls-right');
+
+    mobileDown.addEventListener('click', () => {
+        if (down) {
+            pacmanTopPx += checkWidth;
+            pacman.style.top = pacmanTopPx + 'px';
+            pacman.classList.add('rotate-down');
+            pacman.classList.remove('rotate-left', 'rotate-up', 'rotate-right');
+            boardPosition();
+        }
+    })
+
+    mobileUp.addEventListener('click', () => {
+        if (up) {
+            pacmanTopPx -= checkWidth;
+            pacman.style.top = pacmanTopPx + 'px';
+            pacman.classList.add('rotate-up');
+            pacman.classList.remove('rotate-down', 'rotate-left', 'rotate-right');
+            boardPosition();
+        }
+    })
+
+    mobileLeft.addEventListener('click', () => {
+        if (left) {
+            pacmanLeftPx -= checkWidth;
+            pacman.style.left = pacmanLeftPx + 'px';
+            pacman.classList.add('rotate-left');
+            pacman.classList.remove('rotate-right', 'rotate-down', 'rotate-up');
+            boardPosition();
+        }
+    })
+
+    mobileRight.addEventListener('click', () => {
+        if (right) {
+            pacmanLeftPx += checkWidth;
+            pacman.style.left = pacmanLeftPx + 'px';
+            pacman.classList.add('rotate-right');
+            pacman.classList.remove('rotate-left', 'rotate-down', 'rotate-up');
+            boardPosition();
+        }
+    })
+    //fine mobile
 
     // FUNZIONE MOVIMENTI //
     document.onkeydown = arrowPress;
@@ -204,6 +259,8 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
         // pacman.classList.remove('pacman');
         // pacman.classList.add('pacman-stop');
     }
+
+
 
     function arrowPress(event) {
         // pacman.classList.add('pacman');
@@ -251,6 +308,8 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
                 boardPosition();
             }
         }
+
+
 
         if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
             event.preventDefault();

@@ -226,3 +226,14 @@
     text-shadow: 4px 2px 0px rgba(0, 0, 0, 1);
     text-align: center;
 }
+
+
+@media all and (max-width: 721px) {
+    .pacman-stop{
+        transition: all 0.25s linear;
+    }
+    
+    .pacman {
+        transition: all 0.15s linear;
+    }
+}

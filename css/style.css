@@ -207,23 +207,68 @@ main .credit .button{
 @media all and (max-width: 721px) {
     body {
         overflow: hidden;
+        background-position: top;
+    }
+    main .container {
+        width: 100vw;
+        height: 100vh;
     }
     .board {
-        width: 240px;
-        height: 240px;
+        width: 100vw;
+        height: 100vw;
     }    
     .sidebar{
-        /* background: url(../img/logo_resp.png) no-repeat; */
+        background: none;
+        width: 100vw;
         height: 150px;
         background-size: cover;
     }
+
+
     .score-board{
-        top: 0px !important;
+        top: 10px !important;
+        transform: rotate(0deg) !important;
+        text-align: right !important;
+        right: 20px !important;
+        font-size: 30px !important;
+    }
+
+    .score-board::before{
+        content: 'Points: ';
     }
 
     .exit-btn{
-        width: 35px;
-        height: 35px;
+        position: relative;
+        width: 50px;
+        height: 50px;
+        top: 0px;
+        display: inline-block;
+    }
+
+    .exit-btn::after{
+        position: absolute;
+        content: 'exit';
+        top:15px;
+        left: 9px;
+        text-shadow: 1px 1px #000;
+    }
+
+    .lives-board {
+        top: 80px !important;
+        transform: rotate(0deg)!important;
+        right: 20px !important;
+        left: auto !important;
+        width: 100px !important;
+    }
+
+    .level-board {
+        top: 40px !important;
+        transform: rotate(0deg)!important;
+        right: 20px !important;
+        left: auto !important;
+        width: 100px !important;
+        color: #fff !important;
+        font-size: 30px !important;
     }
 
     .dot-true::before {
@@ -234,14 +279,37 @@ main .credit .button{
     }
 
     .board .countdown{
-        width: 240px;
-        height: 240px;
-        font-size: 50px;
+        width: 100vw;
+        height: 100vw;
+        font-size: 80px;
     }
     .win_div{
         width: 240px !important;
         height: 240px !important;
         margin: -120px !important;
         margin-left: -120px !important;
+    }
+
+    #controls-up {
+        background-image: url(../img/up-arrow.png);
+        background-size: cover;
+    }
+
+    #controls-down {
+        background-image: url(../img/up-arrow.png);
+        background-size: cover;
+        transform: rotate(180deg);
+    }
+
+    #controls-left {
+        background-image: url(../img/up-arrow.png);
+        background-size: cover;
+        transform: rotate(-90deg);
+    }
+
+    #controls-right {
+        background-image: url(../img/up-arrow.png);
+        background-size: cover;
+        transform: rotate(90deg);
     }
 }
