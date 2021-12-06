@@ -220,6 +220,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
             
             let pacmanPositionX = (Math.round(pacmanLeftPx / checkWidth));
             let pacmanPositionY = (Math.round(pacmanTopPx / checkWidth));
+        
 
             if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
                 event.preventDefault();
@@ -266,6 +267,7 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
             pacman.classList.remove('rotate-down', 'rotate-left', 'rotate-right');
             let pacmanPositionX = (Math.round(pacmanLeftPx / checkWidth));
             let pacmanPositionY = (Math.round(pacmanTopPx / checkWidth));
+            
             if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
                 event.preventDefault();
                 try {
@@ -311,6 +313,8 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
             pacman.classList.remove('rotate-right', 'rotate-down', 'rotate-up');
             let pacmanPositionX = (Math.round(pacmanLeftPx / checkWidth));
             let pacmanPositionY = (Math.round(pacmanTopPx / checkWidth));
+            
+        
             if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
                 event.preventDefault();
                 try {
@@ -354,9 +358,9 @@ function charMove(boardDiv, board, score, scoreBoard, level, levelBoard, lives) 
             pacman.style.left = pacmanLeftPx + 'px';
             pacman.classList.add('rotate-right');
             pacman.classList.remove('rotate-left', 'rotate-down', 'rotate-up');
-            
             let pacmanPositionX = (Math.round(pacmanLeftPx / checkWidth));
             let pacmanPositionY = (Math.round(pacmanTopPx / checkWidth));
+          
 
             if (checkEnemyPositionX === pacmanPositionX && checkEnemyPositionY === pacmanPositionY) {
                 event.preventDefault();

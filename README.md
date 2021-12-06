@@ -8,6 +8,7 @@
 - Real enemy AI
 - Difficulty increase
 - Customize game levels
+- Now also responsive
 
 
 >this is the approach I used to generate game levels

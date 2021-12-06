@@ -25,8 +25,8 @@ export const mainMenu = (titleStart, containerStart) => {
     const creditDiv = document.createElement('div');
     creditDiv.classList.add('credit');
     creditDiv.setAttribute('id', 'credit-div');
-    creditDiv.innerHTML = `<div class="credit-name""><div>Coding:<br>Giuseppe Senettone</div>
-    <div>Graphics:<br>Roberto</div></div>`;
+    creditDiv.innerHTML = `<div class="credit-name""><div>Coding:<br>G. Senettone</div>
+    <div>Graphics:<br>R. Tirrito</div></div>`;
 
     const creditBack = document.createElement('a');
     creditBack.classList.add('button');
